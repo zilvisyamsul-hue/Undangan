@@ -9,8 +9,8 @@
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Montserrat', sans-serif; background: black; color: white; text-align: center; overflow-x: hidden; }
         
-        /* Loader Perbaikan */
-        #loader { position: fixed; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 99999; transition: opacity 0.5s; }
+        /* Loader dibuat sangat ringan agar cepat hilang */
+        #loader { position: fixed; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 9999; }
         .loader-text { color: gold; font-size: 24px; animation: fadeBlink 1s infinite; }
 
         .hero {
@@ -19,7 +19,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Nama file sesuai di GitHub Anda */
             background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)), 
                         url('./deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover;
             background-attachment: fixed;
@@ -27,12 +26,12 @@
 
         .nama-pengantin {
             font-family: 'Great Vibes', cursive;
-            font-size: 60px;
-            color: gold;
+            font-size: 65px;
             margin: 0;
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 5px rgba(255,215,0,0.3));
         }
 
         .section { padding: 60px 20px; }
@@ -44,44 +43,56 @@
 </head>
 <body>
 
-    <div id="loader"><div class="loader-text">Memuat Bahagia...</div></div>
+    <div id="loader"><div class="loader-text">Zilvi & Syamsul</div></div>
 
     <div id="main-content">
         <div class="hero">
-            <p style="letter-spacing: 5px;">THE WEDDING OF</p>
+            <p style="letter-spacing: 5px; font-size: 12px;">THE WEDDING OF</p>
             <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
-            <p style="margin-top:20px;">22 Mei 2026</p>
+            <p style="margin-top:20px; font-weight: 300;">Jumat, 22 Mei 2026</p>
             <button class="btn" onclick="startInvitation()">BUKA UNDANGAN</button>
         </div>
 
-        <div class="section" id="isi">
+        <div class="section" id="isi-undangan">
             <div class="card">
-                <h2 style="font-family: 'Great Vibes', cursive; font-size: 40px; color: gold;">Zilvi & Syamsul</h2>
-                <p>Akad Nikah: Jumat, 22 Mei 2026</p>
-                <p>Mesjid Taqwa Koto Magek</p>
+                <h2 style="font-family: 'Great Vibes', cursive; font-size: 40px; color: gold;">Zilvi Rizkiani Putri</h2>
+                <p>Putri dari Bpk. Drs. Masnuh & Ibu Arnita, S.Ag</p>
+                <h2 style="font-family: 'Great Vibes', cursive; font-size: 45px; color: gold;">&</h2>
+                <h2 style="font-family: 'Great Vibes', cursive; font-size: 40px; color: gold;">Syamsul Bahri</h2>
+                <p>Putra dari Bpk. Zulir & Ibu Manidar</p>
+            </div>
+
+            <div class="card">
+                <h3 style="color: gold; border-bottom: 1px solid gold; padding-bottom:10px;">AKAD NIKAH</h3>
+                <p><strong>Jumat, 22 Mei 2026</strong><br>Pukul 14.00 WIB</p>
+                <p>Mesjid Taqwa Koto Magek, Balai Baiak</p>
+            </div>
+
+            <div class="card">
+                <h3 style="color: gold; border-bottom: 1px solid gold; padding-bottom:10px;">KADO DIGITAL</h3>
+                <p><strong>BANK BRI</strong></p>
+                <h2 style="color: gold; letter-spacing: 2px; font-size: 22px;">032101088548501</h2>
+                <p>a/n Zilvi Rizkiani Putri</p>
             </div>
         </div>
     </div>
 
     <audio id="music" loop>
-        <source src="https://files.catbox.moe/1f9jue.mp3" type="audio/mp3">
+        <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_9939f29230.mp3" type="audio/mp3">
     </audio>
 
     <script>
-        // Pastikan loader hilang meskipun gambar belum selesai dimuat
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById("loader").style.opacity = "0";
-                setTimeout(() => {
-                    document.getElementById("loader").style.display = "none";
-                }, 500);
-            }, 1000);
+        // Paksa loader hilang segera setelah struktur dasar siap
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.getElementById("loader").style.display = "none";
+            }, 1500); // Loader hanya muncul 1.5 detik saja
         });
 
         const music = document.getElementById("music");
         function startInvitation() {
-            music.play();
-            document.getElementById('isi').scrollIntoView({ behavior: 'smooth' });
+            music.play().catch(e => console.log("Audio play deferred"));
+            document.getElementById('isi-undangan').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
