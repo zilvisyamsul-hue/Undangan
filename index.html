@@ -53,7 +53,7 @@
             display: inline-block;
             padding: 15px 35px;
             background: linear-gradient(to right, #bf953f, #fcf6ba);
-            color: #000;
+            color: #000 !important;
             text-decoration: none;
             font-weight: bold;
             border-radius: 50px;
@@ -90,7 +90,7 @@
     <section class="hero">
         <p>THE WEDDING OF</p>
         <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
-        <p>22 . 05 . 2026</p>
+        <p>Jumat, 22 Mei 2026</p>
         <br>
         <button class="btn" onclick="bukaUndangan()">BUKA UNDANGAN</button>
     </section>
@@ -98,7 +98,7 @@
     <div id="isiUndangan" class="content-section">
         
         <div class="card">
-            <h2>Hitung Mundur</h2>
+            <h2>Menuju Hari Bahagia</h2>
             <div id="countdown">
                 <div class="count-box"><span id="days" class="count-num">0</span><span class="count-lab">Hari</span></div>
                 <div class="count-box"><span id="hours" class="count-num">0</span><span class="count-lab">Jam</span></div>
@@ -121,7 +121,7 @@
             <p>Mulai Pukul 10.00 WIB s/d Selesai</p>
             <p>Bertempat di:<br>Rumah Mempelai Wanita<br>Koto Magek</p>
             <br>
-            <a href="https://maps.google.com/?q=Koto+Magek" target="_blank" class="btn">BUKA LOKASI DI GOOGLE MAPS</a>
+            <a href="https://maps.app.goo.gl/QuwRrMeDSiX12KW98" target="_blank" class="btn">BUKA LOKASI DI GOOGLE MAPS</a>
         </div>
 
         <div class="card">
@@ -153,7 +153,9 @@
 
     <script>
         function bukaUndangan() {
-            document.getElementById("undanganMusic").play().catch(e => console.log("Musik diputar"));
+            // Putar Musik
+            document.getElementById("undanganMusic").play().catch(e => console.log("Musik Aktif"));
+            // Scroll ke Konten
             document.getElementById("isiUndangan").scrollIntoView({ behavior: "smooth" });
         }
 
@@ -170,6 +172,7 @@
             window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(pesan)}`, '_blank');
         }
 
+        // Countdown Timer ke 22 Mei 2026
         const tanggalTujuan = new Date("May 22, 2026 14:00:00").getTime();
         setInterval(function() {
             const selisih = tanggalTujuan - new Date().getTime();
