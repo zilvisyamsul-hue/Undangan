@@ -9,19 +9,14 @@
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
         
-        /* Definisi Animasi */
+        /* Animasi */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideInUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        @keyframes rotateGold { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(15deg); } }
-        @keyframes pulseBtn { 0% { box-shadow: 0 0 0 0 rgba(252, 246, 186, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(252, 246, 186, 0); } 100% { box-shadow: 0 0 0 0 rgba(252, 246, 186, 0); } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes falling { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
 
-        /* Gaya Animasi Global */
-        .animate-fade { animation: fadeIn 2s ease-out; }
-        .animate-up { animation: slideInUp 1.2s ease-out both; }
-        .delay-1 { animation-delay: 0.3s; }
-        .delay-2 { animation-delay: 0.6s; }
+        /* Partikel Romantis */
+        .particle { position: fixed; top: -10%; color: #fcf6ba; font-size: 20px; user-select: none; pointer-events: none; z-index: 99; animation: falling linear infinite; }
 
-        /* Halaman Sampul */
         .hero {
             height: 100vh;
             display: flex;
@@ -32,6 +27,7 @@
                         url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
             padding: 20px;
             text-align: center;
+            position: relative;
         }
 
         .nama-pengantin {
@@ -41,7 +37,6 @@
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: rotateGold 5s infinite alternate; /* Animasi kilau emas */
         }
 
         .penerima {
@@ -51,27 +46,26 @@
             border-radius: 15px;
             backdrop-filter: blur(8px);
             border: 1px solid rgba(191, 149, 63, 0.2);
+            animation: fadeIn 3s ease-in;
         }
 
-        /* Konten Utama */
         .content-section { padding: 80px 20px; background: #000; }
         
         .card {
             background: #111;
-            border: 1px solid rgba(191, 149, 63, 0.5);
+            border: 1px solid rgba(191, 149, 63, 0.4);
             border-radius: 20px;
-            padding: 50px 30px;
+            padding: 40px 25px;
             max-width: 480px;
-            margin: 0 auto 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            margin: 0 auto 60px;
+            text-align: center;
+            opacity: 0; /* Untuk efek muncul saat scroll */
+            transform: translateY(30px);
+            transition: all 1s ease-out;
         }
 
-        .card:hover { transform: translateY(-5px); border-color: #fcf6ba; } /* Animasi hover kartu */
+        .card.reveal { opacity: 1; transform: translateY(0); }
 
-        h2, h3 { font-family: 'Playfair Display', serif; color: #fcf6ba; margin-bottom: 25px; }
-
-        /* Tombol */
         .btn {
             display: inline-block;
             padding: 16px 40px;
@@ -82,151 +76,137 @@
             border-radius: 50px;
             cursor: pointer;
             font-size: 14px;
-            transition: all 0.3s ease;
             width: 100%;
-            max-width: 300px;
-            margin: 10px 0;
-            text-align: center;
+            max-width: 280px;
             border: none;
-            position: relative;
-            overflow: hidden;
+            transition: 0.3s;
         }
 
-        .btn:hover { animation: pulseBtn 1s infinite; transform: scale(1.02); } /* Animasi hover tombol */
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(191, 149, 63, 0.5); }
 
-        /* Input */
-        .guestbook-field {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #fff;
-            border-radius: 10px;
-            font-family: 'Montserrat', sans-serif;
-            transition: border-color 0.3s ease;
-        }
-        .guestbook-field:focus { border-color: #fcf6ba; outline: none; background: rgba(255,255,255,0.05); }
-
-        .quotes { font-style: italic; font-size: 14px; color: #ddd; margin-bottom: 25px; font-family: 'Playfair Display', serif; }
-        
         audio { display: none; }
     </style>
 </head>
 <body>
 
-    <audio id="undanganMusic" loop preload="auto">
+    <audio id="undanganMusic" loop>
         <source src="Wedding Cinematic 1 menit Aflaha and Hakim Story _ by candrapriaperdana (1).mp3" type="audio/mp3">
     </audio>
 
-    <section class="hero animate-fade">
-        <p class="animate-up delay-1">THE WEDDING OF</p>
-        <h1 class="nama-pengantin animate-up">Zilvi & Syamsul</h1>
-        
-        <div class="penerima animate-up delay-2">
-            <p style="font-size: 12px; margin: 0; color: #ddd;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
-            <h2 id="namaTamuUndangan" style="margin: 10px 0; color: #fcf6ba; font-family: 'Playfair Display', serif; font-size: 28px;">Tamu Undangan</h2>
-            <p style="font-size: 11px; margin: 0; color: #aaa;">Kami Mengundang Anda di Hari Bahagia Kami</p>
+    <section class="hero">
+        <p>THE WEDDING OF</p>
+        <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
+        <div class="penerima">
+            <p style="font-size: 12px; margin: 0;">Kepada Yth:</p>
+            <h2 id="namaTamuUndangan" style="margin: 10px 0; color: #fcf6ba; font-family: 'Playfair Display', serif;">Tamu Undangan</h2>
         </div>
-        
-        <button class="btn animate-up delay-2" onclick="bukaUndangan()" style="margin-top: 40px;">BUKA UNDANGAN</button>
+        <button class="btn" onclick="bukaUndangan()" style="margin-top: 30px;">BUKA UNDANGAN</button>
     </section>
 
     <div id="isiUndangan" class="content-section" style="display:none;">
         
-        <div class="card animate-up">
+        <div class="card">
             <h3>AKAD NIKAH</h3>
-            <p style="font-size: 18px; color: #fff;"><b>Jumat, 22 Mei 2026</b><br>Pukul 14.00 WIB</p>
-            <p style="color: #ccc;">Mesjid Taqwa Koto Magek,<br>Balai Baiak</p>
+            <p><b>Jumat, 22 Mei 2026</b><br>Pukul 14.00 WIB</p>
+            <p>Mesjid Taqwa Koto Magek,<br>Balai Baiak</p>
         </div>
 
-        <div class="card animate-up">
+        <div class="card">
             <h3>RESEPSI</h3>
-            <p style="font-size: 18px; color: #fff;"><b>Minggu - Senin</b><br>24 - 25 Mei 2026</p>
-            <p style="color: #ccc;">Mulai Pukul 10.00 WIB s/d Selesai</p>
-            <p style="color: #fff; background: rgba(191, 149, 63, 0.1); padding: 10px; border-radius: 8px;">Bertempat di:<br><b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak</p>
+            <p><b>Minggu - Senin</b><br>24 - 25 Mei 2026</p>
+            <p>Mulai Pukul 10.00 WIB s/d Selesai</p>
+            <p style="background: rgba(191, 149, 63, 0.1); padding: 10px; border-radius: 10px;">
+                Bertempat di:<br><b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak
+            </p>
             <br>
-            <a href="https://maps.app.goo.gl/QuwRrMeDSiX12KW98" target="_blank" class="btn">BUKA LOKASI DI GOOGLE MAPS</a>
+            <a href="https://maps.app.goo.gl/QuwRrMeDSiX12KW98" target="_blank" class="btn">LIHAT LOKASI</a>
         </div>
 
-        <div class="card animate-up">
+        <div class="card">
             <h3>BUKU TAMU & DOA</h3>
-            <p class="quotes">"Tinggalkan doa restu dan ucapan selamat untuk kedua mempelai."</p>
             <div style="text-align: left;">
-                <input type="text" id="namaPengirimDoa" class="guestbook-field" placeholder="Nama Anda">
-                <textarea id="pesanDoa" class="guestbook-field" rows="5" placeholder="Tulis doa atau ucapan selamat..."></textarea>
-                <button class="btn" onclick="kirimDoa()">KIRIM DOA & UCAPAN</button>
+                <input type="text" id="namaPengirim" style="width:100%; padding:12px; margin-bottom:15px; background:#222; border:1px solid #444; color:#fff; border-radius:8px;" placeholder="Nama Anda">
+                <textarea id="pesanDoa" style="width:100%; padding:12px; margin-bottom:15px; background:#222; border:1px solid #444; color:#fff; border-radius:8px;" rows="4" placeholder="Tulis ucapan doa..."></textarea>
+                <button class="btn" onclick="kirimDoa()">KIRIM UCAPAN</button>
             </div>
         </div>
 
-        <div class="card animate-up">
+        <div class="card">
             <h3>WEDDING GIFT</h3>
-            <p class="quotes">"Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Namun, jika Anda ingin memberikan tanda kasih, kami sangat berterima kasih atas kebaikan tersebut."</p>
-            <p style="font-size: 18px; color: #fff;">BANK BRI</p>
-            <p style="font-size: 24px; color: #fcf6ba; letter-spacing: 2px;"><b>032101088548501</b></p>
-            <p style="color: #ccc;">a/n Zilvi Rizkiani Putri</p>
-            <button class="btn" onclick="salinRekening()">SALIN NO. REKENING</button>
-        </div>
-
-        <div class="card animate-up" style="border:none; background:transparent; box-shadow:none; text-align:center;">
-            <p style="font-family: 'Great Vibes', cursive; font-size: 40px; color: #fcf6ba;">Terima Kasih</p>
-            <p style="color: #aaa; font-size: 12px;">Zilvi & Syamsul</p>
+            <p style="font-style: italic; font-size: 13px; margin-bottom: 20px;">"Doa restu Anda adalah hadiah terindah, namun jika ingin memberikan tanda kasih..."</p>
+            <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
+            <button class="btn" onclick="salinRekening()">SALIN REKENING</button>
         </div>
 
     </div>
 
     <script>
-        // Fitur Ambil Nama Tamu dari URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const namaTamu = urlParams.get('to');
-        if (namaTamu) {
-            // Mengganti simbol '+' dengan spasi untuk tampilan nama
-            document.getElementById('namaTamuUndangan').innerText = namaTamu.replace(/\+/g, ' ');
-        }
+        // Ambil Nama dari URL
+        const params = new URLSearchParams(window.location.search);
+        const tamu = params.get('to');
+        if (tamu) document.getElementById('namaTamuUndangan').innerText = tamu.replace(/\+/g, ' ');
 
-        // Fungsi Membuka Undangan & Memutar Musik
+        // Efek Partikel Berjatuhan
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.innerHTML = '🌸'; // Bisa diganti '✨' atau '❤️'
+            particle.classList.add('particle');
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.animationDuration = Math.random() * 3 + 2 + 's';
+            particle.style.opacity = Math.random();
+            document.body.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, 5000);
+        }
+        setInterval(createParticle, 500);
+
         function bukaUndangan() {
-            var audio = document.getElementById("undanganMusic");
+            // Putar Musik
+            document.getElementById("undanganMusic").play();
             
-            // Mencoba memutar musik (dicegah browser jika belum interaksi)
-            audio.play().then(function() {
-                console.log("Musik diputar berhasil.");
-            }).catch(function(error) {
-                console.log("Browser memblokir autoplay. Musik akan diputar.");
-                // Musik tetap diputar karena fungsi ini dipicu oleh klik tombol
-                audio.play(); 
-            });
+            // Tampilkan konten
+            const isi = document.getElementById("isiUndangan");
+            isi.style.display = "block";
 
-            // Menampilkan konten utama
-            document.getElementById("isiUndangan").style.display = "block";
-            
-            // Gulir halus ke konten utama
-            document.getElementById("isiUndangan").scrollIntoView({ behavior: "smooth" });
-        }
+            // Scroll Otomatis Halus ke bawah
+            let body = document.documentElement;
+            let targetPos = isi.offsetTop;
+            let currentPos = window.pageYOffset;
+            let speed = 2; // Kecepatan scroll
 
-        // Fungsi Salin Rekening
-        function salinRekening() {
-            navigator.clipboard.writeText("032101088548501").then(function() {
-                alert("Nomor rekening berhasil disalin!");
-            }, function() {
-                alert("Gagal menyalin. Silakan salin manual.");
-            });
-        }
-
-        // Fungsi Kirim Doa via WhatsApp
-        function kirimDoa() {
-            const nama = document.getElementById("namaPengirimDoa").value;
-            const pesan = document.getElementById("pesanDoa").value;
-            
-            if(!nama.trim() || !pesan.trim()) { 
-                alert("Mohon isi nama dan ucapan doa Anda."); 
-                return; 
+            function autoScroll() {
+                if (currentPos < targetPos) {
+                    currentPos += speed;
+                    window.scrollTo(0, currentPos);
+                    requestAnimationFrame(autoScroll);
+                }
             }
-            
-            const teksWhatsApp = `Halo Zilvi & Syamsul, saya ${nama} ingin memberikan doa & ucapan: \n\n"${pesan}"`;
-            
-            // Membuka tautan WhatsApp di tab baru
-            window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(teksWhatsApp)}`, '_blank');
+            autoScroll();
+
+            // Jalankan deteksi reveal kartu saat scroll
+            window.addEventListener('scroll', revealCards);
+            setTimeout(revealCards, 500);
+        }
+
+        function revealCards() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < window.innerHeight - 100) {
+                    card.classList.add('reveal');
+                }
+            });
+        }
+
+        function salinRekening() {
+            navigator.clipboard.writeText("032101088548501");
+            alert("Nomor rekening berhasil disalin!");
+        }
+
+        function kirimDoa() {
+            const nama = document.getElementById("namaPengirim").value;
+            const pesan = document.getElementById("pesanDoa").value;
+            const teks = Halo Zilvi & Syamsul, saya ${nama} mengucapkan: ${pesan};
+            window.open(https://wa.me/6281266595366?text=${encodeURIComponent(teks)}, '_blank');
         }
     </script>
 </body>
