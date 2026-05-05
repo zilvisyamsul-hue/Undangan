@@ -15,7 +15,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
             padding: 20px;
             text-align: center;
@@ -28,6 +28,15 @@
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .penerima {
+            margin-top: 20px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(191, 149, 63, 0.3);
         }
 
         .content-section { padding: 60px 20px; background: #000; }
@@ -44,11 +53,6 @@
 
         h2, h3 { font-family: 'Playfair Display', serif; color: #fcf6ba; margin-bottom: 20px; }
 
-        #countdown { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
-        .count-box { min-width: 60px; }
-        .count-num { display: block; font-size: 26px; font-weight: bold; color: #fff; }
-        .count-lab { font-size: 10px; text-transform: uppercase; color: #bf953f; }
-
         .btn {
             display: inline-block;
             padding: 15px 35px;
@@ -57,7 +61,6 @@
             text-decoration: none;
             font-weight: bold;
             border-radius: 50px;
-            border: none;
             cursor: pointer;
             font-size: 14px;
             transition: 0.3s;
@@ -65,9 +68,10 @@
             max-width: 280px;
             margin: 10px 0;
             text-align: center;
+            border: none;
         }
 
-        .rsvp-field {
+        .rsvp-field, .guestbook-field {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
@@ -75,9 +79,10 @@
             border: 1px solid #444;
             color: #fff;
             border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .quotes { font-style: italic; font-size: 13px; color: #ccc; margin-bottom: 20px; line-height: 1.8; }
+        .quotes { font-style: italic; font-size: 13px; color: #ccc; margin-bottom: 20px; }
         audio { display: none; }
     </style>
 </head>
@@ -90,25 +95,18 @@
     <section class="hero">
         <p>THE WEDDING OF</p>
         <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
-        <p>Jumat, 22 Mei 2026</p>
-        <br>
-        <button class="btn" onclick="bukaUndangan()">BUKA UNDANGAN</button>
+        
+        <div class="penerima">
+            <p style="font-size: 12px; margin: 0;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+            <h2 id="namaTamuUndangan" style="margin: 10px 0; color: #fcf6ba;">Tamu Undangan</h2>
+            <p style="font-size: 11px; margin: 0;">Kami Mengundang Anda di Hari Bahagia Kami</p>
+        </div>
+        
+        <button class="btn" onclick="bukaUndangan()" style="margin-top: 30px;">BUKA UNDANGAN</button>
     </section>
 
-    <div id="isiUndangan" class="content-section">
+    <div id="isiUndangan" class="content-section" style="display:none;">
         
-        <div class="card">
-            <h2>Menuju Hari Bahagia</h2>
-            <div id="countdown">
-                <div class="count-box"><span id="days" class="count-num">0</span><span class="count-lab">Hari</span></div>
-                <div class="count-box"><span id="hours" class="count-num">0</span><span class="count-lab">Jam</span></div>
-                <div class="count-box"><span id="mins" class="count-num">0</span><span class="count-lab">Menit</span></div>
-                <div class="count-box"><span id="secs" class="count-num">0</span><span class="count-lab">Detik</span></div>
-            </div>
-            <p style="font-style: italic; font-size: 14px;">"Dan di antara tanda-tanda kekuasaan-Nya diciptakan-Nya untukmu pasangan hidup dari jenismu sendiri supaya kamu dapat ketenangan hati..."</p>
-            <p><b>(QS. Ar-Rum: 21)</b></p>
-        </div>
-
         <div class="card">
             <h3>AKAD NIKAH</h3>
             <p><b>Jumat, 22 Mei 2026</b><br>Pukul 14.00 WIB</p>
@@ -119,68 +117,58 @@
             <h3>RESEPSI</h3>
             <p><b>Minggu - Senin</b><br>24 - 25 Mei 2026</p>
             <p>Mulai Pukul 10.00 WIB s/d Selesai</p>
-            <p>Bertempat di:<br>Rumah Mempelai Wanita<br>Koto Magek</p>
+            <p>Bertempat di:<br><b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak</p>
             <br>
             <a href="https://maps.app.goo.gl/QuwRrMeDSiX12KW98" target="_blank" class="btn">BUKA LOKASI DI GOOGLE MAPS</a>
         </div>
 
         <div class="card">
-            <h3>WEDDING GIFT</h3>
-            <p class="quotes">
-                "Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Namun, jika Anda ingin memberikan tanda kasih, kami sangat berterima kasih atas kebaikan tersebut."
-            </p>
-            <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
-            <button class="btn" onclick="salinRekening()">SALIN NO. REKENING</button>
+            <h3>BUKU TAMU & DOA</h3>
+            <div style="text-align: left;">
+                <label style="font-size: 12px; color: #bf953f;">Nama</label>
+                <input type="text" id="namaPengirimDoa" class="guestbook-field" placeholder="Nama Anda">
+                <label style="font-size: 12px; color: #bf953f;">Ucapan Doa Restu</label>
+                <textarea id="pesanDoa" class="guestbook-field" rows="4" placeholder="Tulis doa atau ucapan selamat..."></textarea>
+                <button class="btn" onclick="kirimDoa()">KIRIM DOA & UCAPAN</button>
+            </div>
         </div>
 
         <div class="card">
-            <h3>RESERVASI</h3>
-            <div style="text-align: left; max-width: 300px; margin: 0 auto;">
-                <label style="font-size: 12px; color: #bf953f;">Nama Tamu</label>
-                <input type="text" id="namaTamu" class="rsvp-field" placeholder="Nama Anda">
-                
-                <label style="font-size: 12px; color: #bf953f;">Konfirmasi</label>
-                <select id="statusHadir" class="rsvp-field">
-                    <option value="Hadir">Saya akan Hadir</option>
-                    <option value="Berhalangan">Berhalangan Hadir</option>
-                </select>
-                
-                <button class="btn" onclick="kirimRSVP()">KIRIM KONFIRMASI</button>
-            </div>
+            <h3>WEDDING GIFT</h3>
+            <p class="quotes">"Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Namun, jika Anda ingin memberikan tanda kasih..."</p>
+            <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
+            <button class="btn" onclick="salinRekening()">SALIN NO. REKENING</button>
         </div>
 
     </div>
 
     <script>
+        // Fitur Ambil Nama Tamu dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const namaTamu = urlParams.get('to');
+        if (namaTamu) {
+            document.getElementById('namaTamuUndangan').innerText = namaTamu;
+        }
+
         function bukaUndangan() {
-            // Putar Musik
-            document.getElementById("undanganMusic").play().catch(e => console.log("Musik Aktif"));
-            // Scroll ke Konten
+            document.getElementById("undanganMusic").play().catch(e => console.log("Music play"));
+            document.getElementById("isiUndangan").style.display = "block";
             document.getElementById("isiUndangan").scrollIntoView({ behavior: "smooth" });
         }
 
         function salinRekening() {
             navigator.clipboard.writeText("032101088548501");
-            alert("Nomor rekening berhasil disalin!");
+            alert("Nomor rekening disalin!");
         }
 
-        function kirimRSVP() {
-            const nama = document.getElementById("namaTamu").value;
-            const status = document.getElementById("statusHadir").value;
-            if (nama.trim() === "") { alert("Mohon masukkan nama Anda"); return; }
-            const pesan = `Halo Zilvi & Syamsul, saya ${nama} mengonfirmasi bahwa saya ${status} di acara pernikahan Anda.`;
-            window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(pesan)}`, '_blank');
+        function kirimDoa() {
+            const nama = document.getElementById("namaPengirimDoa").value;
+            const pesan = document.getElementById("pesanDoa").value;
+            if(!nama || !pesan) { alert("Mohon isi nama dan ucapan Anda."); return; }
+            
+            const teks = `Halo Zilvi & Syamsul, saya ${nama} memberikan ucapan: ${pesan}`;
+            window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(teks)}`, '_blank');
         }
-
-        // Countdown Timer ke 22 Mei 2026
-        const tanggalTujuan = new Date("May 22, 2026 14:00:00").getTime();
-        setInterval(function() {
-            const selisih = tanggalTujuan - new Date().getTime();
-            document.getElementById("days").innerHTML = Math.max(0, Math.floor(selisih / 86400000));
-            document.getElementById("hours").innerHTML = Math.max(0, Math.floor((selisih % 86400000) / 3600000));
-            document.getElementById("mins").innerHTML = Math.max(0, Math.floor((selisih % 3600000) / 60000));
-            document.getElementById("secs").innerHTML = Math.max(0, Math.floor((selisih % 60000) / 1000));
-        }, 1000);
     </script>
 </body>
 </html>
