@@ -71,7 +71,7 @@
             border: none;
         }
 
-        .rsvp-field, .guestbook-field {
+        .guestbook-field {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
@@ -89,7 +89,7 @@
 <body>
 
     <audio id="undanganMusic" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_9939f29230.mp3" type="audio/mp3">
+        <source src="Wedding Cinematic 1 menit Aflaha and Hakim Story _ by candrapriaperdana (1).mp3" type="audio/mp3">
     </audio>
 
     <section class="hero">
@@ -99,7 +99,6 @@
         <div class="penerima">
             <p style="font-size: 12px; margin: 0;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
             <h2 id="namaTamuUndangan" style="margin: 10px 0; color: #fcf6ba;">Tamu Undangan</h2>
-            <p style="font-size: 11px; margin: 0;">Kami Mengundang Anda di Hari Bahagia Kami</p>
         </div>
         
         <button class="btn" onclick="bukaUndangan()" style="margin-top: 30px;">BUKA UNDANGAN</button>
@@ -125,9 +124,7 @@
         <div class="card">
             <h3>BUKU TAMU & DOA</h3>
             <div style="text-align: left;">
-                <label style="font-size: 12px; color: #bf953f;">Nama</label>
                 <input type="text" id="namaPengirimDoa" class="guestbook-field" placeholder="Nama Anda">
-                <label style="font-size: 12px; color: #bf953f;">Ucapan Doa Restu</label>
                 <textarea id="pesanDoa" class="guestbook-field" rows="4" placeholder="Tulis doa atau ucapan selamat..."></textarea>
                 <button class="btn" onclick="kirimDoa()">KIRIM DOA & UCAPAN</button>
             </div>
@@ -135,7 +132,7 @@
 
         <div class="card">
             <h3>WEDDING GIFT</h3>
-            <p class="quotes">"Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Namun, jika Anda ingin memberikan tanda kasih..."</p>
+            <p class="quotes">"Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami..."</p>
             <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
             <button class="btn" onclick="salinRekening()">SALIN NO. REKENING</button>
         </div>
@@ -143,7 +140,6 @@
     </div>
 
     <script>
-        // Fitur Ambil Nama Tamu dari URL
         const urlParams = new URLSearchParams(window.location.search);
         const namaTamu = urlParams.get('to');
         if (namaTamu) {
@@ -151,7 +147,10 @@
         }
 
         function bukaUndangan() {
-            document.getElementById("undanganMusic").play().catch(e => console.log("Music play"));
+            var audio = document.getElementById("undanganMusic");
+            audio.play().catch(function(error) {
+                console.log("Autoplay dicegah oleh browser, musik akan diputar setelah interaksi.");
+            });
             document.getElementById("isiUndangan").style.display = "block";
             document.getElementById("isiUndangan").scrollIntoView({ behavior: "smooth" });
         }
@@ -165,7 +164,6 @@
             const nama = document.getElementById("namaPengirimDoa").value;
             const pesan = document.getElementById("pesanDoa").value;
             if(!nama || !pesan) { alert("Mohon isi nama dan ucapan Anda."); return; }
-            
             const teks = `Halo Zilvi & Syamsul, saya ${nama} memberikan ucapan: ${pesan}`;
             window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(teks)}`, '_blank');
         }
