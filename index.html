@@ -1,221 +1,159 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Undangan Zilvi & Syamsul</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Zilvi & Syamsul</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&family=Playfair+Display:italic,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: white; text-align: center; scroll-behavior: smooth; }
+        
+        /* Langsung ke Background Utama tanpa Loader */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Menggunakan file background utama Anda */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
+            padding: 20px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+        .nama-pengantin {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(40px, 10vw, 70px);
+            margin: 15px 0;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-<style>
-* { box-sizing: border-box; }
-body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background: #000;
-    color: white;
-    text-align: center;
-    scroll-behavior: smooth;
-}
+        .section { padding: 60px 20px; background: #000; }
+        .card { 
+            background: rgba(25, 25, 25, 0.95); 
+            margin: 0 auto 30px; 
+            padding: 30px 20px; 
+            border-radius: 15px; 
+            border: 1px solid #bf953f; 
+            max-width: 400px; 
+        }
 
-/* HERO */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-    url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
-    padding: 20px;
-}
+        #countdown { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
+        .count-item { min-width: 60px; }
+        .count-num { display: block; font-size: 24px; font-weight: bold; color: #fcf6ba; border-bottom: 1px solid #bf953f; }
+        .count-lab { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; display: block; }
 
-.nama-pengantin {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(40px, 10vw, 70px);
-    margin: 15px 0;
-    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+        .btn { 
+            padding: 15px 25px; 
+            background: #fff; 
+            border: none; 
+            border-radius: 30px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            color: #000; 
+            width: 100%; 
+            max-width: 280px; 
+            margin: 10px 0;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .btn-gold { background: linear-gradient(to right, #bf953f, #fcf6ba); }
 
-/* SECTION */
-.section {
-    padding: 60px 20px;
-    background: #000;
-    display: none; /* awal disembunyikan */
-    animation: fadeIn 1s ease;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
-.card {
-    background: rgba(20,20,20,0.95);
-    margin: 0 auto 30px;
-    padding: 30px 20px;
-    border-radius: 15px;
-    border: 1px solid #bf953f;
-    max-width: 400px;
-}
-
-/* COUNTDOWN */
-#countdown {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 30px 0;
-}
-.count-num {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fcf6ba;
-}
-
-/* BUTTON */
-.btn {
-    padding: 15px;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-    max-width: 280px;
-    margin: 10px 0;
-}
-
-.btn-gold {
-    background: linear-gradient(to right, #bf953f, #fcf6ba);
-}
-
-/* INPUT */
-.rsvp-input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #bf953f;
-    background: #111;
-    color: #fff;
-}
-</style>
+        .rsvp-input { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border-radius: 8px; 
+            border: 1px solid #bf953f; 
+            background: #111; 
+            color: #fff; 
+        }
+    </style>
 </head>
-
 <body>
 
-<audio id="music" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_9939f29230.mp3" type="audio/mp3">
-</audio>
+    <audio id="music" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_9939f29230.mp3" type="audio/mp3">
+    </audio>
 
-<!-- HERO -->
-<div class="hero">
-    <p style="letter-spacing:5px; font-size:12px; color:#fcf6ba;">THE WEDDING OF</p>
-    <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
-    <p>22 . 05 . 2026</p>
-    <button class="btn" onclick="startInv()">BUKA UNDANGAN</button>
-</div>
+    <div class="hero">
+        <p style="letter-spacing: 5px; font-size: 12px; color: #fcf6ba;">THE WEDDING OF</p>
+        <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
+        <p style="letter-spacing: 2px; font-weight: 300;">Jumat, 22 Mei 2026</p>
+        <button class="btn" onclick="startInv()">BUKA UNDANGAN</button>
+    </div>
 
-<!-- KONTEN -->
-<div id="konten" class="section">
+    <div id="konten" class="section">
+        <div class="card">
+            <h2 style="font-family: 'Playfair Display', serif; color: #fcf6ba; font-style: italic;">Save The Date</h2>
+            <div id="countdown">
+                <div class="count-item"><span id="days" class="count-num">0</span><span class="count-lab">Hari</span></div>
+                <div class="count-item"><span id="hours" class="count-num">0</span><span class="count-lab">Jam</span></div>
+                <div class="count-item"><span id="mins" class="count-num">0</span><span class="count-lab">Menit</span></div>
+                <div class="count-item"><span id="secs" class="count-num">0</span><span class="count-lab">Detik</span></div>
+            </div>
+            <p style="font-size: 14px; line-height: 1.6; color: #eee;">
+                "Dan di antara tanda-tanda kekuasaan-Nya diciptakan-Nya untukmu pasangan hidup dari jenismu sendiri supaya kamu dapat ketenangan hati..."<br>
+                <b>(QS. Ar-Rum: 21)</b>
+            </p>
+        </div>
 
-    <div class="card">
-        <h2 style="color:#fcf6ba;">Save The Date</h2>
-        <div id="countdown">
-            <div><span id="days" class="count-num">0</span><br>Hari</div>
-            <div><span id="hours" class="count-num">0</span><br>Jam</div>
-            <div><span id="mins" class="count-num">0</span><br>Menit</div>
-            <div><span id="secs" class="count-num">0</span><br>Detik</div>
+        <div class="card">
+            <h3 style="color: #fcf6ba;">AKAD NIKAH</h3>
+            <p><b>Jumat, 22 Mei 2026</b><br>Pukul 14.00 WIB</p>
+            <p style="font-size: 14px;">Mesjid Taqwa Koto Magek,<br>Balai Baiak</p>
+        </div>
+
+        <div class="card">
+            <h3 style="color: #fcf6ba;">WEDDING GIFT</h3>
+            <p>BANK BRI<br>032101088548501<br>a/n Zilvi Rizkiani Putri</p>
+            <button class="btn btn-gold" onclick="copyRek()">SALIN REKENING</button>
+        </div>
+
+        <div class="card" id="reservasi">
+            <h3 style="color: #fcf6ba;">RESERVASI</h3>
+            <p style="font-size: 13px; color: #ccc; margin-bottom: 15px;">Mohon konfirmasikan kehadiran Anda:</p>
+            <input type="text" id="nama" class="rsvp-input" placeholder="Nama Lengkap">
+            <select id="status" class="rsvp-input">
+                <option value="Hadir">Hadir</option>
+                <option value="Berhalangan">Berhalangan</option>
+            </select>
+            <button class="btn btn-gold" onclick="kirimRSVP()">KIRIM KONFIRMASI</button>
         </div>
     </div>
 
-    <div class="card">
-        <h3 style="color:#fcf6ba;">AKAD NIKAH</h3>
-        <p>Jumat, 22 Mei 2026<br>Pukul 14.00 WIB</p>
-        <p>Mesjid Taqwa</p>
-    </div>
+    <script>
+        function startInv() {
+            document.getElementById("music").play();
+            document.getElementById("konten").scrollIntoView({ behavior: "smooth" });
+        }
 
-    <div class="card">
-        <h3 style="color:#fcf6ba;">WEDDING GIFT</h3>
-        <p>BANK BRI<br>032101088548501<br>a/n Zilvi</p>
-        <button class="btn btn-gold" onclick="copyRek()">SALIN REKENING</button>
-    </div>
+        function copyRek() {
+            navigator.clipboard.writeText("032101088548501");
+            alert("Nomor rekening berhasil disalin!");
+        }
 
-    <div class="card">
-        <h3 style="color:#fcf6ba;">RESERVASI</h3>
-        <input type="text" id="nama" class="rsvp-input" placeholder="Nama Lengkap">
-        <select id="status" class="rsvp-input">
-            <option>Hadir</option>
-            <option>Berhalangan</option>
-        </select>
-        <button class="btn" onclick="kirimRSVP()">KIRIM</button>
-    </div>
+        function kirimRSVP() {
+            const nama = document.getElementById("nama").value;
+            const status = document.getElementById("status").value;
+            if (!nama) return alert("Silakan masukkan nama Anda");
+            const teks = `Halo Zilvi & Syamsul, saya ${nama} mengonfirmasi akan ${status} di acara pernikahan Anda.`;
+            window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(teks)}`);
+        }
 
-</div>
-
-<script>
-
-// buka undangan
-function startInv() {
-    const music = document.getElementById("music");
-    music.play().catch(() => {});
-
-    const konten = document.getElementById("konten");
-    konten.style.display = "block";
-    konten.scrollIntoView({ behavior: "smooth" });
-}
-
-// copy rekening (fix mobile)
-function copyRek() {
-    const text = "032101088548501";
-
-    if (navigator.clipboard) {
-        navigator.clipboard.writeText(text);
-    } else {
-        const input = document.createElement("input");
-        input.value = text;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand("copy");
-        document.body.removeChild(input);
-    }
-
-    alert("Rekening disalin!");
-}
-
-// RSVP WA
-function kirimRSVP() {
-    const nama = document.getElementById("nama").value.trim();
-    const status = document.getElementById("status").value;
-
-    if (!nama) {
-        alert("Isi nama dulu ya");
-        return;
-    }
-
-    const pesan = `Halo Zilvi & Syamsul, saya ${nama} akan ${status} di acara Anda.`;
-    window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(pesan)}`);
-}
-
-// COUNTDOWN
-const target = new Date("2026-05-22T14:00:00").getTime();
-
-setInterval(() => {
-    const now = new Date().getTime();
-    const gap = target - now;
-
-    if (gap <= 0) return;
-
-    document.getElementById("days").innerText = Math.floor(gap / 86400000);
-    document.getElementById("hours").innerText = Math.floor((gap % 86400000) / 3600000);
-    document.getElementById("mins").innerText = Math.floor((gap % 3600000) / 60000);
-    document.getElementById("secs").innerText = Math.floor((gap % 60000) / 1000);
-
-}, 1000);
-
-</script>
-
+        // Hitung Mundur Akad 22 Mei 2026
+        const target = new Date("May 22, 2026 14:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const gap = target - now;
+            document.getElementById("days").innerText = Math.max(0, Math.floor(gap / 86400000));
+            document.getElementById("hours").innerText = Math.max(0, Math.floor((gap % 86400000) / 3600000));
+            document.getElementById("mins").innerText = Math.max(0, Math.floor((gap % 3600000) / 60000));
+            document.getElementById("secs").innerText = Math.max(0, Math.floor((gap % 60000) / 1000));
+        }, 1000);
+    </script>
 </body>
 </html>
