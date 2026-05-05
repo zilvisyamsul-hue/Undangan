@@ -7,158 +7,149 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&family=Playfair+Display:italic,wght@0,400;1,700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background: black; color: white; text-align: center; overflow-x: hidden; scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: white; text-align: center; scroll-behavior: smooth; }
         
-        #loader { position: fixed; width: 100%; height: 100%; background: black; display: flex; justify-content: center; align-items: center; z-index: 9999; }
-        .loader-text { color: gold; font-size: 24px; animation: fadeBlink 1s infinite; font-family: 'Playfair Display', serif; }
-
+        /* Background Utama */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)), 
-                        url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover;
-            background-attachment: fixed;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
+            padding: 20px;
         }
 
         .nama-pengantin {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(45px, 12vw, 75px);
-            margin: 10px 0;
+            font-size: clamp(40px, 10vw, 70px);
+            margin: 15px 0;
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 5px rgba(255,215,0,0.3));
         }
 
-        .count-date-section {
-            padding: 80px 20px;
-            background: linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85)), url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover;
-            background-attachment: fixed;
+        .section { padding: 60px 20px; background: #000; }
+        .card { 
+            background: rgba(20, 20, 20, 0.95); 
+            margin: 0 auto 30px; 
+            padding: 30px 20px; 
+            border-radius: 15px; 
+            border: 1px solid #bf953f; 
+            max-width: 400px; 
         }
 
-        .title-count { font-family: 'Playfair Display', serif; font-style: italic; font-size: 28px; margin-bottom: 30px; letter-spacing: 2px; color: gold; }
+        #countdown { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
+        .count-item { min-width: 60px; }
+        .count-num { display: block; font-size: 24px; font-weight: bold; color: #fcf6ba; border-bottom: 1px solid #bf953f; }
+        .count-lab { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; display: block; }
 
-        #countdown { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
-        .count-item { min-width: 65px; }
-        .count-num { display: block; font-size: 28px; font-weight: bold; color: white; border-bottom: 1px solid gold; padding-bottom: 5px; }
-        .count-lab { font-size: 11px; margin-top: 5px; display: block; text-transform: uppercase; letter-spacing: 1px; }
+        .btn { 
+            padding: 15px 25px; 
+            background: #fff; 
+            border: none; 
+            border-radius: 30px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            color: #000; 
+            width: 100%; 
+            max-width: 280px; 
+            margin: 10px 0;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .btn-gold { background: linear-gradient(to right, #bf953f, #fcf6ba); }
 
-        .ayat-container { max-width: 600px; margin: 0 auto; padding: 20px; line-height: 1.8; font-size: 14px; color: rgba(255,255,255,0.9); }
-        .ayat-ref { display: block; margin-top: 15px; font-style: italic; font-weight: bold; color: gold; }
+        .rsvp-input { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border-radius: 8px; 
+            border: 1px solid #bf953f; 
+            background: #111; 
+            color: #fff; 
+        }
 
-        .section { padding: 40px 20px; }
-        .card { background: rgba(30, 30, 30, 0.9); margin: 15px auto; padding: 25px; border-radius: 12px; border: 1px solid gold; max-width: 400px; }
-        
-        .btn { padding: 14px 25px; background: white; border: none; border-radius: 25px; cursor: pointer; font-weight: bold; color: black; text-decoration: none; display: inline-block; margin: 10px 0; width: 100%; max-width: 280px; transition: 0.3s; font-size: 14px; }
-        .btn-gold { background: gold; color: black; }
-
-        .rsvp-input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #444; background: #111; color: white; font-family: 'Montserrat', sans-serif; }
-
-        @keyframes fadeBlink { 0%, 100% { opacity: 1 } 50% { opacity: .4 } }
+        audio { display: none; }
     </style>
 </head>
 <body>
 
-    <div id="loader"><div class="loader-text">Zilvi & Syamsul</div></div>
+    <audio id="music" loop>
+        <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_9939f29230.mp3" type="audio/mp3">
+    </audio>
 
-    <div id="main-content">
-        <div class="hero">
-            <p style="letter-spacing: 4px; font-size: 11px; color: gold;">THE WEDDING OF</p>
-            <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
-            <p style="margin-top:15px; font-weight: 300; letter-spacing: 2px;">22 . 05 . 2026</p>
-            <button class="btn" onclick="startInvitation()">BUKA UNDANGAN</button>
-        </div>
+    <div class="hero">
+        <p style="letter-spacing: 5px; font-size: 12px; color: #fcf6ba;">THE WEDDING OF</p>
+        <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
+        <p style="letter-spacing: 2px;">22 . 05 . 2026</p>
+        <button class="btn" onclick="startInv()">BUKA UNDANGAN</button>
+    </div>
 
-        <div class="count-date-section" id="isi-undangan">
-            <h2 class="title-count">Save The Date</h2>
+    <div id="konten" class="section">
+        <div class="card">
+            <h2 style="font-family: 'Playfair Display', serif; color: #fcf6ba; font-style: italic;">Save The Date</h2>
             <div id="countdown">
                 <div class="count-item"><span id="days" class="count-num">0</span><span class="count-lab">Hari</span></div>
                 <div class="count-item"><span id="hours" class="count-num">0</span><span class="count-lab">Jam</span></div>
                 <div class="count-item"><span id="mins" class="count-num">0</span><span class="count-lab">Menit</span></div>
                 <div class="count-item"><span id="secs" class="count-num">0</span><span class="count-lab">Detik</span></div>
             </div>
-            <div class="ayat-container">
-                " Dan di antara tanda-tanda kekuasaan-Nya diciptakan-Nya untukmu pasangan hidup dari jenismu sendiri supaya kamu dapat ketenangan hati dan dijadikannya kasih sayang di antara kamu. "
-                <span class="ayat-ref">( QS. Ar - Rum 21 )</span>
-            </div>
+            <p style="font-size: 14px; line-height: 1.6; color: #eee;">"Dan di antara tanda-tanda kekuasaan-Nya diciptakan-Nya untukmu pasangan hidup dari jenismu sendiri..."<br><b>(QS. Ar-Rum: 21)</b></p>
         </div>
 
-        <div class="section">
-            <h2 style="font-family: 'Playfair Display', serif; color: gold;">Wedding Event</h2>
-            <div class="card">
-                <h3 style="border-bottom: 1px solid gold; padding-bottom:10px; font-size: 18px;">AKAD NIKAH</h3>
-                <p><strong>Jumat, 22 Mei 2026</strong><br>Pukul 14.00 WIB</p>
-                <p style="font-size: 14px;">Mesjid Taqwa Koto Magek,<br>Balai Baiak</p>
-            </div>
+        <div class="card">
+            <h3 style="color: #fcf6ba;">AKAD NIKAH</h3>
+            <p>Jumat, 22 Mei 2026<br>Pukul 14.00 WIB</p>
+            <p style="font-size: 14px;">Mesjid Taqwa Koto Magek, Balai Baiak</p>
         </div>
 
-        <div class="section">
-            <div class="card">
-                <h3 style="color: gold; font-size: 18px; border-bottom: 1px solid gold; padding-bottom:10px;">WEDDING GIFT</h3>
-                <p style="font-size: 13px; color: #ccc;">Tanpa mengurangi rasa hormat, bagi tamu yang ingin memberikan tanda kasih dapat melalui:</p>
-                <p><strong>BANK BRI</strong><br>032101088548501<br>a/n Zilvi Rizkiani Putri</p>
-                <button class="btn btn-gold" onclick="copyRek()">SALIN REKENING</button>
-            </div>
+        <div class="card">
+            <h3 style="color: #fcf6ba;">WEDDING GIFT</h3>
+            <p>BANK BRI<br>032101088548501<br>a/n Zilvi Rizkiani Putri</p>
+            <button class="btn btn-gold" onclick="copyRek()">SALIN REKENING</button>
+        </div>
 
-            <div class="card">
-                <h3 style="color: gold; font-size: 18px; border-bottom: 1px solid gold; padding-bottom:10px;">RESERVASI</h3>
-                <p style="font-size: 13px; color: #ccc;">Mohon konfirmasikan kehadiran Anda melalui form di bawah ini:</p>
-                <input type="text" id="rsvpName" class="rsvp-input" placeholder="Nama Lengkap">
-                <select id="rsvpStatus" class="rsvp-input">
-                    <option value="Hadir">Hadir</option>
-                    <option value="Berhalangan">Berhalangan</option>
-                </select>
-                <button class="btn" onclick="sendRSVP()">KIRIM KONFIRMASI</button>
-            </div>
+        <div class="card" id="reservasi">
+            <h3 style="color: #fcf6ba;">RESERVASI</h3>
+            <input type="text" id="nama" class="rsvp-input" placeholder="Nama Lengkap">
+            <select id="status" class="rsvp-input">
+                <option value="Hadir">Hadir</option>
+                <option value="Berhalangan">Berhalangan</option>
+            </select>
+            <button class="btn" style="background: #fff;" onclick="kirimRSVP()">KIRIM KONFIRMASI</button>
         </div>
     </div>
 
-    <audio id="music" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_9939f29230.mp3" type="audio/mp3">
-    </audio>
-
     <script>
-        window.onload = function() {
-            setTimeout(() => {
-                const loader = document.getElementById("loader");
-                loader.style.opacity = "0";
-                setTimeout(() => { loader.style.display = "none"; }, 500);
-            }, 1000);
-        };
+        function startInv() {
+            document.getElementById("music").play();
+            document.getElementById("konten").scrollIntoView({ behavior: "smooth" });
+        }
 
-        const targetDate = new Date("May 22, 2026 14:00:00").getTime();
+        function copyRek() {
+            navigator.clipboard.writeText("032101088548501");
+            alert("Nomor rekening berhasil disalin!");
+        }
+
+        function kirimRSVP() {
+            const nama = document.getElementById("nama").value;
+            const status = document.getElementById("status").value;
+            if (!nama) return alert("Masukkan nama Anda");
+            const teks = `Halo Zilvi & Syamsul, saya ${nama} mengonfirmasi akan ${status} di acara Anda.`;
+            window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(teks)}`);
+        }
+
+        // Timer
+        const target = new Date("May 22, 2026 14:00:00").getTime();
         setInterval(() => {
-            const now = new Date().getTime();
-            const gap = targetDate - now;
-            const d = Math.floor(gap / (1000 * 60 * 60 * 24));
-            const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((gap % (1000 * 60)) / 1000);
-            document.getElementById("days").innerText = d > 0 ? d : 0;
-            document.getElementById("hours").innerText = h > 0 ? h : 0;
-            document.getElementById("mins").innerText = m > 0 ? m : 0;
-            document.getElementById("secs").innerText = s > 0 ? s : 0;
+            const gap = target - new Date().getTime();
+            document.getElementById("days").innerText = Math.max(0, Math.floor(gap / 86400000));
+            document.getElementById("hours").innerText = Math.max(0, Math.floor((gap % 86400000) / 3600000));
+            document.getElementById("mins").innerText = Math.max(0, Math.floor((gap % 3600000) / 60000));
+            document.getElementById("secs").innerText = Math.max(0, Math.floor((gap % 60000) / 1000));
         }, 1000);
-
-        function startInvitation() {
-            document.getElementById("music").play().catch(() => {});
-            document.getElementById('isi-undangan').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function copyRek(){
-            navigator.clipboard.writeText("032101088548501").then(() => alert("Nomor Rekening Berhasil disalin!"));
-        }
-
-        function sendRSVP() {
-            const name = document.getElementById("rsvpName").value;
-            const status = document.getElementById("rsvpStatus").value;
-            if(!name) { alert("Silakan masukkan nama Anda"); return; }
-            const message = `Halo Zilvi %26 Syamsul, saya ${name} mengonfirmasi bahwa saya ${status} di acara pernikahan Anda.`;
-            window.open(`https://wa.me/6281266595366?text=${message}`, '_blank');
-        }
     </script>
 </body>
 </html>
