@@ -9,15 +9,12 @@
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
         
-        /* Animasi & Partikel */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes falling { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
-        .particle { position: fixed; top: -10%; color: #fcf6ba; font-size: 20px; user-select: none; pointer-events: none; z-index: 1; animation: falling linear infinite; }
-
+        /* Background Hero - Sudah diganti ke foto.jpg */
         .hero {
             height: 100vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('foto.jpg') center/cover no-repeat;
             padding: 20px; text-align: center; position: relative; z-index: 5;
         }
 
@@ -34,26 +31,29 @@
             display: inline-block; padding: 16px 40px; background: linear-gradient(to right, #bf953f, #fcf6ba);
             color: #000 !important; text-decoration: none; font-weight: 700; border-radius: 50px;
             cursor: pointer; font-size: 14px; width: 100%; max-width: 280px; border: none;
-            box-shadow: 0 4px 15px rgba(191, 149, 63, 0.3); margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(191, 149, 63, 0.3); transition: 0.3s;
         }
 
-        .content-section { display: none; padding: 60px 20px; background: #000; position: relative; z-index: 10; }
+        .content-section { display: none; padding: 60px 20px; background: #000; position: relative; }
         
         .card {
             background: #111; border: 1px solid rgba(191, 149, 63, 0.4);
             border-radius: 20px; padding: 40px 25px; max-width: 480px; margin: 0 auto 50px; text-align: center;
         }
 
-        /* Countdown Style */
-        .timer-wrapper { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
-        .timer-item { background: rgba(191, 149, 63, 0.2); padding: 10px; border-radius: 10px; min-width: 60px; border: 1px solid #bf953f; }
-        .timer-item span { display: block; font-size: 20px; font-weight: bold; color: #fcf6ba; }
+        .quote { font-family: 'Playfair Display', serif; font-style: italic; color: #fcf6ba; font-size: 14px; margin-bottom: 25px; line-height: 1.8; }
+
+        /* Countdown */
+        .timer-container { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .timer-box { background: rgba(191, 149, 63, 0.2); border: 1px solid #bf953f; padding: 10px; border-radius: 10px; min-width: 65px; }
+        .timer-box span { display: block; font-size: 22px; font-weight: bold; color: #fcf6ba; }
         .timer-label { font-size: 10px; text-transform: uppercase; }
 
-        .quote { font-family: 'Playfair Display', serif; font-style: italic; color: #ccc; font-size: 14px; margin-bottom: 20px; line-height: 1.8; }
-        
         #music-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: none; }
         .circle-btn { width: 50px; height: 50px; border-radius: 50%; background: #bf953f; border: none; cursor: pointer; font-size: 20px; }
+
+        @keyframes falling { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        .particle { position: fixed; top: -10%; color: #fcf6ba; font-size: 20px; pointer-events: none; z-index: 1; animation: falling linear infinite; }
     </style>
 </head>
 <body>
@@ -67,11 +67,11 @@
     </div>
 
     <section id="hero" class="hero">
-        <p style="letter-spacing: 2px;">THE WEDDING OF</p>
+        <p style="letter-spacing: 3px; font-size: 12px;">THE WEDDING OF</p>
         <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
-        <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 15px; border: 1px solid #bf953f;">
-            <p style="font-size: 12px; margin: 0;">Kepada Yth:</p>
-            <h2 id="namaTamuUndangan" style="margin: 10px 0; color: #fcf6ba; font-family: 'Playfair Display', serif;">Tamu Undangan</h2>
+        <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 15px; border: 1px solid #bf953f; margin-bottom: 20px;">
+            <p style="font-size: 12px; margin: 0; color: #ccc;">Kepada Yth:</p>
+            <h2 id="namaTamuUndangan" style="margin: 5px 0; color: #fcf6ba; font-family: 'Playfair Display', serif;">Tamu Undangan</h2>
         </div>
         <button class="btn" onclick="bukaUndangan()">BUKA UNDANGAN</button>
     </section>
@@ -81,12 +81,12 @@
         <div class="card">
             <p class="quote">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya."<br><b>(QS. Ar-Rum: 21)</b></p>
             
-            <p style="font-size: 13px; letter-spacing: 1px;">MENGHITUNG HARI</p>
-            <div class="timer-wrapper">
-                <div class="timer-item"><span id="days">0</span><div class="timer-label">Hari</div></div>
-                <div class="timer-item"><span id="hours">0</span><div class="timer-label">Jam</div></div>
-                <div class="timer-item"><span id="mins">0</span><div class="timer-label">Menit</div></div>
-                <div class="timer-item"><span id="secs">0</span><div class="timer-label">Detik</div></div>
+            <p style="font-size: 12px; letter-spacing: 2px; color: #bf953f;">MENGHITUNG HARI</p>
+            <div class="timer-container">
+                <div class="timer-box"><span id="days">0</span><div class="timer-label">Hari</div></div>
+                <div class="timer-box"><span id="hours">0</span><div class="timer-label">Jam</div></div>
+                <div class="timer-box"><span id="mins">0</span><div class="timer-label">Menit</div></div>
+                <div class="timer-box"><span id="secs">0</span><div class="timer-label">Detik</div></div>
             </div>
         </div>
 
@@ -104,17 +104,20 @@
                 <b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak
             </p>
             <br>
-            <a href="http://googleusercontent.com/maps.google.com/7" target="_blank" class="btn" style="text-decoration:none;">LIHAT LOKASI</a>
+            <a href="https://goo.gl/maps/9t7BqK3z2P1W8V8p9" target="_blank" class="btn" style="text-decoration:none;">LIHAT LOKASI</a>
         </div>
 
         <div class="card">
             <h3>WEDDING GIFT</h3>
             <p class="quote">"Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Namun jika ingin memberikan tanda kasih, Anda dapat menyalurkannya melalui:"</p>
-            
             <p>BANK BRI<br><b style="font-size: 22px; color: #fcf6ba;">032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
-            <button class="btn" onclick="salinRekening()" style="font-size:12px; padding: 10px 20px;">SALIN REKENING</button>
+            <button class="btn" onclick="salinRekening()" style="font-size:12px; padding: 10px 20px; max-width: 200px;">SALIN REKENING</button>
         </div>
 
+        <div style="text-align: center; padding: 40px 0;">
+            <p style="font-family: 'Great Vibes', cursive; font-size: 35px; color: #fcf6ba; margin: 0;">Terima Kasih</p>
+            <p style="font-size: 12px; color: #555;">Zilvi & Syamsul</p>
+        </div>
     </div>
 
     <script>
@@ -122,23 +125,21 @@
         const tamu = urlParams.get('to');
         if (tamu) document.getElementById('namaTamuUndangan').innerText = tamu.replace(/\+/g, ' ');
 
-        // Fungsi Countdown ke 22 Mei 2026
-        function updateTimer() {
+        function countdown() {
             const target = new Date('May 22, 2026 14:00:00').getTime();
             const now = new Date().getTime();
-            const diff = target - now;
-
-            if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            const gap = target - now;
+            if (gap > 0) {
+                document.getElementById('days').innerText = Math.floor(gap / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').innerText = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('mins').innerText = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('secs').innerText = Math.floor((gap % (1000 * 60)) / 1000);
             }
         }
-        setInterval(updateTimer, 1000);
+        setInterval(countdown, 1000);
 
         function bukaUndangan() {
-            document.getElementById("audioLagu").play();
+            document.getElementById("audioLagu").play().catch(e => console.log("Play blocked"));
             document.getElementById("isiUndangan").style.display = "block";
             document.getElementById("music-btn").style.display = "block";
             window.scrollTo({ top: document.getElementById("isiUndangan").offsetTop, behavior: "smooth" });
