@@ -78,7 +78,6 @@
         }
 
         .quotes { font-style: italic; font-size: 13px; color: #ccc; margin-bottom: 20px; line-height: 1.8; }
-
         audio { display: none; }
     </style>
 </head>
@@ -120,9 +119,9 @@
             <h3>RESEPSI</h3>
             <p><b>Minggu - Senin</b><br>24 - 25 Mei 2026</p>
             <p>Mulai Pukul 10.00 WIB s/d Selesai</p>
-            <p>Bertempat di:<br>Rumah Mempelai Wanita</p>
+            <p>Bertempat di:<br>Rumah Mempelai Wanita<br>Koto Magek</p>
             <br>
-            <a href="https://maps.app.goo.gl/9t7BqK3z2P1W8V8p9" target="_blank" class="btn">LIHAT LOKASI RESEPSI</a>
+            <a href="https://maps.google.com/?q=Koto+Magek" target="_blank" class="btn">BUKA LOKASI DI GOOGLE MAPS</a>
         </div>
 
         <div class="card">
@@ -154,7 +153,7 @@
 
     <script>
         function bukaUndangan() {
-            document.getElementById("undanganMusic").play().catch(e => console.log("Musik aktif"));
+            document.getElementById("undanganMusic").play().catch(e => console.log("Musik diputar"));
             document.getElementById("isiUndangan").scrollIntoView({ behavior: "smooth" });
         }
 
