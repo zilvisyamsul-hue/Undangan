@@ -11,27 +11,32 @@
 
 <style>
 *{box-sizing: border-box;}
-body{margin:0;font-family: 'Montserrat', sans-serif;background:black;color:white;text-align:center;overflow-x:hidden}
+body{margin:0;font-family: 'Montserrat', sans-serif;background:black;color:white;text-align:center;overflow-x:hidden; scroll-behavior: smooth;}
 
+/* LOADER */
 #loader{position:fixed;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;z-index:99999}
-.loader-text{color:gold;font-size:24px;animation:fadeBlink 1s infinite;}
+.loader-text{color:gold;font-size:24px;animation:fadeBlink 1s infinite; font-family: 'Montserrat', sans-serif;}
 
+/* HERO - Penyesuaian Nama File Foto Anda */
 .hero{
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* PENTING: Nama file foto panjang Anda dipasang di sini */
     background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)), 
-                url('./22022.jpg') center/cover;
+                url('./deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover;
     background-attachment: fixed;
 }
 
+/* TULISAN NAMA MEWAH */
 .nama-pengantin {
     font-family: 'Great Vibes', cursive;
-    font-size: clamp(50px, 15vw, 80px);
+    font-size: 70px;
     color: gold;
     margin: 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
     background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -39,60 +44,40 @@ body{margin:0;font-family: 'Montserrat', sans-serif;background:black;color:white
 }
 
 .section{padding:60px 20px;}
-.card{background:rgba(20, 20, 20, 0.95); margin:15px auto; padding:25px; border-radius:15px; border: 1px solid rgba(212, 175, 55, 0.5); max-width: 450px;}
-.btn {padding:15px 30px; background: linear-gradient(45deg, #bf953f, #fcf6ba); border:none; border-radius:30px; cursor:pointer; font-weight: bold; color: #333; font-size: 14px; text-decoration: none; display: inline-block; margin: 5px; box-shadow: 0 4px 15px rgba(212,175,55,0.4);}
+.card{background:rgba(20, 20, 20, 0.95); margin:15px auto; padding:25px; border-radius:15px; border: 1px solid rgba(212, 175, 55, 0.5); max-width: 450px; box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);}
+.btn {padding:12px 25px; background: linear-gradient(45deg, #bf953f, #fcf6ba); border:none; border-radius:30px; cursor:pointer; font-weight: bold; color: #333; font-size: 14px; transition: 0.3s; text-decoration: none; display: inline-block; margin: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);}
+.btn:hover {transform: translateY(-2px); box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);}
 
-/* Music Container - Tersembunyi */
-#music-container { position: fixed; top: -100px; left: 0; visibility: hidden; }
+/* RSVP INPUT */
+.rsvp-input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid gold; background: #222; color: white; font-family: 'Montserrat', sans-serif; }
 
-/* Tombol Kontrol Musik Mengambang */
-#music-toggle {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background: gold;
-    border-radius: 50%;
-    z-index: 9999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    font-size: 20px;
-    box-shadow: 0 0 10px gold;
-}
+/* AUDIO CONTROL */
+#audio-control { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; background: gold; border-radius: 50%; display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 9999; color: black; font-size: 24px; border: 2px solid white; }
 
 @keyframes fadeBlink{0%,100%{opacity:1}50%{opacity:.3}}
 </style>
 </head>
-<body>
+<body onclick="playMusicOnce()">
 
-<div id="loader"><div class="loader-text">Zilvi & Syamsul</div></div>
-
-<div id="music-container">
-    <iframe id="sc-player" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" 
-        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/326127110&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
-    </iframe>
-</div>
-
-<div id="music-toggle" onclick="toggleMusic()">🎵</div>
+<div id="loader"><div class="loader-text">Memuat Bahagia...</div></div>
+<div id="audio-control" onclick="toggleMusic(event)">🎵</div>
 
 <div id="main-content">
-    <div class="hero">
-        <p style="letter-spacing: 5px; font-size: 12px; margin-bottom: 10px;">THE WEDDING OF</p>
+    <div class="hero" id="hero">
+        <p style="letter-spacing: 5px; font-size: 14px; margin-bottom: 10px;">THE WEDDING OF</p>
         <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
         <p style="color: white; margin-top:20px; font-weight: 300;">Jumat, 22 Mei 2026</p>
+        <div id="countdown" style="color: gold; font-weight: bold; font-size: 18px; margin: 15px 0;"></div>
         <button class="btn" onclick="startInvitation()">BUKA UNDANGAN</button>
     </div>
 
-    <div class="section">
+    <div class="section" id="isi-undangan">
         <div class="card">
-            <h2 style="font-family: 'Great Vibes', cursive; font-size: 40px; color: gold;">Zilvi Rizkiani Putri</h2>
-            <p>Putri dari Bpk. Drs. Masnuh & Ibu Arnita, S.Ag</p>
-            <h2 style="font-family: 'Great Vibes', cursive; font-size: 45px; color: gold;">&</h2>
-            <h2 style="font-family: 'Great Vibes', cursive; font-size: 40px; color: gold;">Syamsul Bahri</h2>
-            <p>Putra dari Bpk. Zulir & Ibu Manidar</p>
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 40px; color: gold; margin-bottom: 10px;">Zilvi Rizkiani Putri</h2>
+            <p style="font-size: 13px;">Putri dari Bpk. Drs. Masnuh & Ibu Arnita, S.Ag</p>
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 45px; color: gold; margin: 10px 0;">&</h2>
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 40px; color: gold; margin-bottom: 10px;">Syamsul Bahri</h2>
+            <p style="font-size: 13px;">Putra dari Bpk. Zulir & Ibu Manidar</p>
         </div>
     </div>
 
@@ -100,54 +85,109 @@ body{margin:0;font-family: 'Montserrat', sans-serif;background:black;color:white
         <div class="card">
             <h3 style="color: gold; border-bottom: 1px solid gold; padding-bottom:10px;">AKAD NIKAH</h3>
             <p><strong>Jumat, 22 Mei 2026</strong><br>Pukul 14.00 WIB</p>
-            <p>Mesjid Taqwa Koto Magek, Balai Baiak</p>
+            <p style="font-size: 14px;">Mesjid Taqwa Koto Magek, Balai Baiak</p>
         </div>
         <div class="card">
             <h3 style="color: gold; border-bottom: 1px solid gold; padding-bottom:10px;">RESEPSI</h3>
             <p><strong>24 - 25 Mei 2026</strong><br>Pukul 10.00 WIB - Selesai</p>
-            <p>Kediaman Mempelai Wanita</p>
+            <p style="font-size: 14px;">Kediaman Mempelai Wanita</p>
+            <a href="http://googleusercontent.com/maps.google.com/9" target="_blank" class="btn">LIHAT LOKASI</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 style="color: gold;">RESERVASI</h2>
+        <div class="card">
+            <input type="text" id="rsvpName" class="rsvp-input" placeholder="Nama Anda">
+            <select id="rsvpStatus" class="rsvp-input">
+                <option value="Hadir">Hadir</option>
+                <option value="Berhalangan">Berhalangan</option>
+            </select>
+            <button class="btn" style="width: 100%;" onclick="sendRSVP()">Kirim WhatsApp</button>
         </div>
     </div>
 
     <div class="section">
         <h2 style="color: gold;">KADO DIGITAL</h2>
         <div class="card">
-            <p><strong>BANK BRI</strong></p>
+            <p style="font-size: 14px;"><strong>BANK BRI</strong></p>
             <h2 style="color: gold; letter-spacing: 2px;">032101088548501</h2>
-            <p>a/n Zilvi Rizkiani Putri</p>
+            <p style="font-size: 13px;">a/n Zilvi Rizkiani Putri</p>
             <button class="btn" onclick="copyRek()">SALIN NO. REKENING</button>
         </div>
     </div>
+
+    <footer style="padding: 40px; font-size: 10px; color: #666; letter-spacing: 2px;">
+        © 2026 ZILVI & SYAMSUL WEDDING
+    </footer>
 </div>
 
-<script src="https://w.soundcloud.com/player/api.js"></script>
+<audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/10/14/audio_9939f29230.mp3" type="audio/mp3">
+</audio>
+
 <script>
 window.onload = () => { document.getElementById("loader").style.display = "none"; };
 
-const widget = SC.Widget(document.getElementById('sc-player'));
 let isPlaying = false;
+const music = document.getElementById("music");
+const audioBtn = document.getElementById("audio-control");
 
-function startInvitation() {
-    widget.play();
-    isPlaying = true;
-    document.getElementById('music-toggle').style.display = 'flex';
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+function playMusicOnce() {
+    if(!isPlaying) {
+        music.play().then(() => {
+            isPlaying = true;
+            audioBtn.style.display = "flex";
+            audioBtn.innerHTML = "⏸️";
+        }).catch(() => {});
+    }
 }
 
-function toggleMusic() {
-    if (isPlaying) {
-        widget.pause();
-        document.getElementById('music-toggle').innerHTML = '▶️';
-    } else {
-        widget.play();
-        document.getElementById('music-toggle').innerHTML = '⏸️';
+function startInvitation() {
+    // 1. Nyalakan Musik
+    music.play().then(() => {
+        isPlaying = true;
+        audioBtn.innerHTML = "⏸️";
+        audioBtn.style.display = "flex";
+    }).catch(() => {});
+
+    // 2. Animasi Scroll Otomatis (Halus)
+    const targetElement = document.getElementById("isi-undangan");
+    targetElement.scrollIntoView({ behavior: 'smooth' });
+}
+
+function toggleMusic(event) {
+    event.stopPropagation();
+    if (isPlaying) { 
+        music.pause(); 
+        audioBtn.innerHTML = "▶️";
+    } else { 
+        music.play(); 
+        audioBtn.innerHTML = "⏸️";
     }
     isPlaying = !isPlaying;
 }
 
 function copyRek(){
-    navigator.clipboard.writeText("032101088548501").then(() => alert("Berhasil disalin!"));
+    navigator.clipboard.writeText("032101088548501").then(() => alert("Disalin!"));
 }
+
+function sendRSVP() {
+    const name = document.getElementById("rsvpName").value;
+    const status = document.getElementById("rsvpStatus").value;
+    if(!name) { alert("Nama?"); return; }
+    window.open(https://wa.me/6281266595366?text=Saya ${name} konfirmasi ${status}, '_blank');
+}
+
+// Countdown
+const target = new Date("May 22, 2026 14:00:00").getTime();
+setInterval(() => {
+    const now = new Date().getTime();
+    const diff = target - now;
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("countdown").innerHTML = d + " Hari " + h + " Jam Menuju Akad";
+}, 1000);
 </script>
 </body>
-</html
+</html>
