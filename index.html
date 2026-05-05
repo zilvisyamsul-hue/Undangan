@@ -77,6 +77,8 @@
             border-radius: 8px;
         }
 
+        .quotes { font-style: italic; font-size: 13px; color: #ccc; margin-bottom: 20px; line-height: 1.8; }
+
         audio { display: none; }
     </style>
 </head>
@@ -119,11 +121,15 @@
             <p><b>Minggu - Senin</b><br>24 - 25 Mei 2026</p>
             <p>Mulai Pukul 10.00 WIB s/d Selesai</p>
             <p>Bertempat di:<br>Rumah Mempelai Wanita</p>
-            <a href="https://maps.app.goo.gl/uXv7p6D12j3fR9yX6" target="_blank" class="btn">LIHAT LOKASI RESEPSI</a>
+            <br>
+            <a href="https://maps.app.goo.gl/9t7BqK3z2P1W8V8p9" target="_blank" class="btn">LIHAT LOKASI RESEPSI</a>
         </div>
 
         <div class="card">
             <h3>WEDDING GIFT</h3>
+            <p class="quotes">
+                "Kehadiran dan doa restu Anda adalah hadiah terindah bagi kami. Namun, jika Anda ingin memberikan tanda kasih, kami sangat berterima kasih atas kebaikan tersebut."
+            </p>
             <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
             <button class="btn" onclick="salinRekening()">SALIN NO. REKENING</button>
         </div>
@@ -148,9 +154,7 @@
 
     <script>
         function bukaUndangan() {
-            // Musik diputar saat tombol diklik
-            const audio = document.getElementById("undanganMusic");
-            audio.play().catch(e => console.log("Musik butuh interaksi user"));
+            document.getElementById("undanganMusic").play().catch(e => console.log("Musik aktif"));
             document.getElementById("isiUndangan").scrollIntoView({ behavior: "smooth" });
         }
 
@@ -172,4 +176,9 @@
             const selisih = tanggalTujuan - new Date().getTime();
             document.getElementById("days").innerHTML = Math.max(0, Math.floor(selisih / 86400000));
             document.getElementById("hours").innerHTML = Math.max(0, Math.floor((selisih % 86400000) / 3600000));
-            document.getElementById("mins").innerHTML
+            document.getElementById("mins").innerHTML = Math.max(0, Math.floor((selisih % 3600000) / 60000));
+            document.getElementById("secs").innerHTML = Math.max(0, Math.floor((selisih % 60000) / 1000));
+        }, 1000);
+    </script>
+</body>
+</html>
