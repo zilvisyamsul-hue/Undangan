@@ -1,102 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Zilvi & Syamsul</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Undangan Pernikahan Zilvi & Syamsul</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; text-align: center; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
+        
+        /* Animasi */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes falling { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+
+        /* Partikel */
+        .particle { position: fixed; top: -10%; color: #fcf6ba; font-size: 20px; user-select: none; pointer-events: none; z-index: 1; animation: falling linear infinite; }
+
         .hero {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
+            padding: 20px;
+            text-align: center;
+            position: relative;
         }
-        .nama { font-family: 'Great Vibes', cursive; font-size: 55px; color: #fcf6ba; margin: 10px 0; }
-        .btn-buka {
-            padding: 15px 40px; background: #bf953f; color: #000; font-weight: bold;
-            border: none; border-radius: 50px; font-size: 18px; cursor: pointer;
-            box-shadow: 0 0 20px rgba(252,246,186,0.5);
+
+        .nama-pengantin {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(55px, 15vw, 90px);
+            margin: 10px 0;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
         }
-        #konten { display: none; padding: 40px 20px; }
-        .card { background: #111; border: 1px solid #bf953f; border-radius: 15px; padding: 25px; margin-bottom: 25px; max-width: 400px; margin-left: auto; margin-right: auto; }
-        .btn-maps { display: inline-block; padding: 12px 25px; background: #bf953f; color: #000; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px; }
-        #floating-music { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: none; }
+
+        .penerima {
+            margin: 20px 0;
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(191, 149, 63, 0.3);
+            animation: fadeIn 2s ease-in;
+        }
+
+        .content-section { display: none; padding: 80px 20px; background: #000; }
+        
+        .card {
+            background: #111;
+            border: 1px solid rgba(191, 149, 63, 0.4);
+            border-radius: 20px;
+            padding: 45px 25px;
+            max-width: 480px;
+            margin: 0 auto 60px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .card.reveal { opacity: 1; transform: translateY(0); }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(to right, #bf953f, #fcf6ba);
+            color: #000 !important;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            max-width: 280px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(191, 149, 63, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn:hover { transform: scale(1.05); }
+
+        /* Floating Music Button */
+        #music-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: none; }
+        .circle-btn { width: 50px; height: 50px; border-radius: 50%; background: #bf953f; border: none; cursor: pointer; box-shadow: 0 0 10px rgba(0,0,0,0.5); font-size: 20px; }
+
+        audio { display: none; }
     </style>
 </head>
 <body>
 
-    <audio id="audioId" loop>
+    <audio id="audioLagu" loop>
         <source src="music.mp3." type="audio/mp3">
     </audio>
 
-    <div id="floating-music">
-        <button onclick="putarMusik()" style="width:50px; height:50px; border-radius:50%; border:none; background:#bf953f; cursor:pointer;">🎵</button>
+    <div id="music-btn">
+        <button class="circle-btn" onclick="toggleMusic()">🎵</button>
     </div>
 
-    <div id="hero">
-        <p>THE WEDDING OF</p>
-        <h1 class="nama">Zilvi & Syamsul</h1>
-        <div style="margin-bottom: 25px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
-            <p style="font-size: 12px; margin: 0;">Kepada Yth:</p>
-            <h3 id="namaTamu" style="color: #fcf6ba; margin: 5px 0;">Tamu Undangan</h3>
+    <section id="hero" class="hero">
+        <p style="letter-spacing: 2px;">THE WEDDING OF</p>
+        <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
+        <div class="penerima">
+            <p style="font-size: 12px; margin: 0; color: #ccc;">Kepada Yth:</p>
+            <h2 id="namaTamuUndangan" style="margin: 10px 0; color: #fcf6ba; font-family: 'Playfair Display', serif;">Tamu Undangan</h2>
         </div>
-        <button class="btn-buka" onclick="jalankanBuka()">BUKA UNDANGAN</button>
-    </div>
+        <button class="btn" onclick="bukaUndangan()">BUKA UNDANGAN</button>
+    </section>
 
-    <div id="konten">
+    <div id="isiUndangan" class="content-section">
+        
         <div class="card">
             <h3>AKAD NIKAH</h3>
-            <p>Jumat, 22 Mei 2026<br>14.00 WIB - Selesai</p>
-            <p>Mesjid Taqwa Koto Magek, Balai Baiak</p>
+            <p><b>Jumat, 22 Mei 2026</b><br>Pukul 14.00 WIB</p>
+            <p style="color: #ccc;">Mesjid Taqwa Koto Magek,<br>Balai Baiak</p>
         </div>
 
         <div class="card">
             <h3>RESEPSI</h3>
-            <p>Minggu - Senin, 24 - 25 Mei 2026</p>
-            <p><b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak</p>
-            <a href="https://maps.app.goo.gl/3A3DSRk7vM4z7E6M6" target="_blank" class="btn-maps">BUKA MAPS</a>
+            <p><b>Minggu - Senin</b><br>24 - 25 Mei 2026</p>
+            <p>Mulai Pukul 10.00 WIB s/d Selesai</p>
+            <p style="background: rgba(191, 149, 63, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(191, 149, 63, 0.2);">
+                Bertempat di:<br><b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak
+            </p>
+            <br>
+            <a href="http://googleusercontent.com/maps.google.com/5" target="_blank" class="btn" style="text-decoration:none;">LIHAT LOKASI</a>
         </div>
 
         <div class="card">
-            <h3>UCAPAN & DOA</h3>
-            <input type="text" id="pengirim" placeholder="Nama Anda" style="width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:none;">
-            <textarea id="doa" placeholder="Tulis Ucapan" style="width:100%; padding:10px; border-radius:5px; border:none;"></textarea>
-            <button onclick="kirimWa()" class="btn-maps" style="border:none; width:100%; cursor:pointer;">KIRIM WHATSAPP</button>
+            <h3>WEDDING GIFT</h3>
+            <p style="font-size: 14px; font-style: italic; color: #ccc;">"Doa restu Anda adalah hadiah terindah bagi kami."</p>
+            <p>BANK BRI<br><b style="font-size: 22px; color: #fcf6ba;">032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
+            <button class="btn" onclick="salinRekening()" style="font-size:12px; padding: 10px 20px;">SALIN REKENING</button>
         </div>
 
-        <div class="card">
-            <h3>GIFT</h3>
-            <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
+        <div style="text-align: center; padding: 40px 0;">
+            <p style="font-family: 'Great Vibes', cursive; font-size: 35px; color: #fcf6ba; margin: 0;">Terima Kasih</p>
+            <p style="font-size: 12px; color: #555;">Zilvi & Syamsul</p>
         </div>
+
     </div>
 
     <script>
-        // Ambil Nama dari Link
+        // Ambil Nama Tamu
         const urlParams = new URLSearchParams(window.location.search);
         const tamu = urlParams.get('to');
-        if (tamu) { document.getElementById('namaTamu').innerText = tamu.replace(/\+/g, ' '); }
+        if (tamu) document.getElementById('namaTamuUndangan').innerText = tamu.replace(/\+/g, ' ');
 
-        function jalankanBuka() {
-            // Langsung pindah halaman (paling stabil)
-            document.getElementById('hero').style.display = 'none';
-            document.getElementById('konten').style.display = 'block';
-            document.getElementById('floating-music').style.display = 'block';
-            
-            // Coba putar musik tapi tidak wajib (agar tidak error)
-            var lagu = document.getElementById("audioId");
-            lagu.play().catch(function(e) { console.log("Gagal putar otomatis"); });
+        // Efek Partikel Sakura
+        function createParticle() {
+            const p = document.createElement('div');
+            p.innerHTML = '🌸';
+            p.classList.add('particle');
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = Math.random() * 3 + 4 + 's';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 7000);
         }
 
-        function putarMusik() {
-            var lagu = document.getElementById("audioId");
-            if (lagu.paused) { lagu.play(); } else { lagu.pause(); }
-        }
+        function bukaUndangan() {
+            // Putar Musik
+            const audio = document.getElementById("audioLagu");
+            audio.play().catch(e => console.log("Audio ditunda"));
 
-        function kirimWa() {
-            const n = document.getElementById("pengirim").value;
-            const d = document.getElementById("doa").value;
-            window.open(`https://wa.me/6281266595366?text=Saya%20${n}%20mengucapkan%20${d}`, '_blank');
-        }
-    </script>
-</body>
-</html>
+            // Tampilkan Konten
+            document.getElementById("isiUndangan").style.display = "
