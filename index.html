@@ -6,13 +6,9 @@
     <title>Undangan Pernikahan Zilvi & Syamsul</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:italic,wght@0,400;1,700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; line-height: 1.6; overflow-x: hidden; }
         
-        /* Partikel diletakkan di paling belakang agar tidak menghalangi tombol */
-        .particle { position: fixed; top: -10%; color: #fcf6ba; font-size: 20px; user-select: none; pointer-events: none; z-index: 1; animation: falling linear infinite; }
-        @keyframes falling { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
-
         .hero {
             height: 100vh;
             display: flex;
@@ -24,7 +20,7 @@
             padding: 20px;
             text-align: center;
             position: relative;
-            z-index: 10; /* Menaruh hero di depan partikel */
+            z-index: 5;
         }
 
         .nama-pengantin {
@@ -45,7 +41,25 @@
             border: 1px solid rgba(191, 149, 63, 0.2);
         }
 
-        .content-section { display: none; padding: 60px 20px; background: #000; position: relative; z-index: 10; }
+        .btn-buka {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(to right, #bf953f, #fcf6ba);
+            color: #000 !important;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            max-width: 280px;
+            border: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 100;
+        }
+
+        .content-section { display: none; padding: 60px 20px; background: #000; }
         
         .card {
             background: #111;
@@ -57,47 +71,27 @@
             text-align: center;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 16px 40px;
-            background: linear-gradient(to right, #bf953f, #fcf6ba);
-            color: #000 !important;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-            max-width: 280px;
-            border: none;
-            box-shadow: 0 4px 15px rgba(191, 149, 63, 0.3);
-            transition: 0.3s;
-            -webkit-tap-highlight-color: transparent; /* Hilangkan warna biru saat tekan di HP */
-        }
-
-        .btn:active { transform: scale(0.95); }
-
-        audio { display: none; }
+        .particle { position: fixed; top: -10%; color: #fcf6ba; font-size: 20px; pointer-events: none; z-index: 1; animation: falling linear infinite; }
+        @keyframes falling { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
     </style>
 </head>
 <body>
 
     <audio id="undanganMusic" loop>
-        <source src="Wedding Cinematic 1 menit Aflaha and Hakim Story _ by candrapriaperdana (1).mp3" type="audio/mp3">
+        <source src="music.mp3." type="audio/mp3">
     </audio>
 
-    <section id="heroSection" class="hero">
+    <section id="heroPage" class="hero">
         <p>THE WEDDING OF</p>
         <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
         <div class="penerima">
-            <p style="font-size: 12px; margin: 0; color: #ddd;">Kepada Yth:</p>
+            <p style="font-size: 12px; margin: 0;">Kepada Yth:</p>
             <h2 id="namaTamuUndangan" style="margin: 10px 0; color: #fcf6ba; font-family: 'Playfair Display', serif;">Tamu Undangan</h2>
         </div>
-        <button class="btn" id="btnBuka" onclick="bukaUndangan()">BUKA UNDANGAN</button>
+        <button class="btn-buka" onclick="bukaUndangan()">BUKA UNDANGAN</button>
     </section>
 
     <div id="isiUndangan" class="content-section">
-        
         <div class="card">
             <h3>AKAD NIKAH</h3>
             <p><b>Jumat, 22 Mei 2026</b><br>Pukul 14.00 WIB</p>
@@ -112,75 +106,40 @@
                 Bertempat di:<br><b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak
             </p>
             <br>
-            <a href="https://maps.app.goo.gl/QuwRrMeDSiX12KW98" target="_blank" class="btn">LIHAT LOKASI</a>
-        </div>
-
-        <div class="card">
-            <h3>BUKU TAMU & DOA</h3>
-            <div style="text-align: left;">
-                <input type="text" id="namaPengirim" style="width:100%; padding:12px; margin-bottom:15px; background:#222; border:1px solid #444; color:#fff; border-radius:8px;" placeholder="Nama Anda">
-                <textarea id="pesanDoa" style="width:100%; padding:12px; margin-bottom:15px; background:#222; border:1px solid #444; color:#fff; border-radius:8px;" rows="4" placeholder="Tulis ucapan doa..."></textarea>
-                <button class="btn" onclick="kirimDoa()">KIRIM UCAPAN</button>
-            </div>
+            <a href="https://maps.app.goo.gl/9t7BqK3z2P1W8V8p9" target="_blank" style="text-decoration:none;">
+                <div class="btn-buka" style="font-size:14px; text-align:center;">LIHAT LOKASI</div>
+            </a>
         </div>
 
         <div class="card" style="margin-bottom: 100px;">
             <h3>WEDDING GIFT</h3>
             <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
-            <button class="btn" onclick="salinRekening()">SALIN REKENING</button>
+            <button class="btn-buka" onclick="salinRekening()" style="font-size:14px;">SALIN REKENING</button>
         </div>
-
     </div>
 
     <script>
-        // Ambil Nama Tamu dari URL (?to=Nama+Tamu)
-        const params = new URLSearchParams(window.location.search);
-        const tamu = params.get('to');
+        const urlParams = new URLSearchParams(window.location.search);
+        const tamu = urlParams.get('to');
         if (tamu) document.getElementById('namaTamuUndangan').innerText = tamu.replace(/\+/g, ' ');
 
-        // Efek Partikel
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.innerHTML = '🌸';
-            particle.classList.add('particle');
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDuration = Math.random() * 3 + 4 + 's';
-            document.body.appendChild(particle);
-            setTimeout(() => { particle.remove(); }, 7000);
-        }
-        setInterval(createParticle, 800);
-
-        // Fungsi Buka Undangan
         function bukaUndangan() {
-            // 1. Putar Musik
-            const audio = document.getElementById("undanganMusic");
-            audio.play().catch(e => console.log("Audio play blocked"));
+            // Memutar musik
+            var audio = document.getElementById("undanganMusic");
+            audio.play().catch(e => console.log("Audio play error"));
+
+            // Tampilkan isi
+            document.getElementById("isiUndangan").style.display = "block";
             
-            // 2. Tampilkan isi undangan
-            const isi = document.getElementById("isiUndangan");
-            isi.style.display = "block";
-
-            // 3. Scroll otomatis ke bagian isi
-            setTimeout(() => {
-                window.scrollTo({
-                    top: isi.offsetTop,
-                    behavior: 'smooth'
-                });
-            }, 100);
+            // Scroll otomatis ke isi
+            window.scrollTo({
+                top: document.getElementById("isiUndangan").offsetTop,
+                behavior: "smooth"
+            });
+            
+            // Jalankan partikel bunga
+            setInterval(createParticle, 800);
         }
 
-        function salinRekening() {
-            navigator.clipboard.writeText("032101088548501");
-            alert("Nomor rekening berhasil disalin!");
-        }
-
-        function kirimDoa() {
-            const nama = document.getElementById("namaPengirim").value;
-            const pesan = document.getElementById("pesanDoa").value;
-            if(!nama || !pesan) { alert("Mohon isi nama dan ucapan."); return; }
-            const teks = Halo Zilvi & Syamsul, saya ${nama} mengucapkan: ${pesan};
-            window.open(https://wa.me/6281266595366?text=${encodeURIComponent(teks)}, '_blank');
-        }
-    </script>
-</body>
-</html>
+        function createParticle() {
+            const p = document.createElement('
