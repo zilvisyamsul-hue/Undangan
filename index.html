@@ -15,7 +15,6 @@
             line-height: 1.6; 
             scroll-behavior: smooth; 
             overflow-x: hidden;
-            /* Latar belakang foto tetap */
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                         url('foto.jpg') center/cover no-repeat fixed;
         }
@@ -78,6 +77,7 @@
 
     <audio id="audioLagu" loop preload="auto">
         <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
     </audio>
 
     <div id="music-btn">
@@ -111,7 +111,7 @@
         <div class="card">
             <h3>AKAD NIKAH</h3>
             <p><b>Jumat, 22 Mei 2026</b><br>Pukul 14.00 WIB</p>
-            <p>Masjid At-Taqwa, Koto Magek</p>
+            <p>Masjid At-Taqwa Bukareh, Koto Magek</p>
         </div>
 
         <div class="card">
@@ -122,7 +122,7 @@
                 <b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak
             </p>
             <br>
-            <a href="https://maps.app.goo.gl/9" target="_blank" class="btn" style="text-decoration:none;">LIHAT LOKASI RESEPSI</a>
+            <a href="https://maps.app.goo.gl/uX3L9Vp96uY19j8P9" target="_blank" class="btn" style="text-decoration:none;">LIHAT LOKASI RESEPSI</a>
         </div>
 
         <div class="card">
@@ -158,23 +158,34 @@
         setInterval(countdown, 1000);
 
         function bukaUndangan() {
-            const lagu = document.getElementById("audioLagu");
-            lagu.play().catch(e => console.log("Autoplay dicegah oleh browser"));
+            const audio = document.getElementById("audioLagu");
+            
+            // Mencoba memutar audio segera setelah interaksi user
+            audio.play().then(() => {
+                console.log("Audio playing");
+            }).catch(error => {
+                console.log("Gagal putar otomatis: ", error);
+            });
             
             document.getElementById("isiUndangan").style.display = "block";
             document.getElementById("music-btn").style.display = "block";
-            window.scrollTo({ top: document.getElementById("isiUndangan").offsetTop, behavior: "smooth" });
+            
+            window.scrollTo({
+                top: document.getElementById("isiUndangan").offsetTop,
+                behavior: "smooth"
+            });
+            
             setInterval(createParticle, 800);
         }
 
         function toggleMusic() {
-            const a = document.getElementById("audioLagu");
+            const audio = document.getElementById("audioLagu");
             const btn = document.getElementById("btnSimbol");
-            if (a.paused) {
-                a.play();
+            if (audio.paused) {
+                audio.play();
                 btn.innerText = "🎵";
             } else {
-                a.pause();
+                audio.pause();
                 btn.innerText = "🔇";
             }
         }
@@ -194,4 +205,4 @@
         }
     </script>
 </body>
-</html
+</html>
