@@ -9,7 +9,6 @@
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; line-height: 1.6; scroll-behavior: smooth; }
         
-        /* Sampul Depan */
         .hero {
             height: 100vh;
             display: flex;
@@ -22,8 +21,6 @@
             text-align: center;
         }
 
-        .hero p { letter-spacing: 4px; font-size: 13px; color: #fcf6ba; margin-bottom: 10px; }
-        
         .nama-pengantin {
             font-family: 'Great Vibes', cursive;
             font-size: clamp(45px, 12vw, 80px);
@@ -33,7 +30,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Konten Utama */
         .content-section { padding: 60px 20px; background: #000; }
         
         .card {
@@ -43,18 +39,16 @@
             padding: 40px 20px;
             max-width: 450px;
             margin: 0 auto 40px;
-            box-shadow: 0 0 20px rgba(191, 149, 63, 0.2);
+            box-shadow: 0 0 20px rgba(191, 149, 63, 0.1);
         }
 
-        h2, h3 { font-family: 'Playfair Display', serif; color: #fcf6ba; }
+        h2, h3 { font-family: 'Playfair Display', serif; color: #fcf6ba; margin-bottom: 20px; }
 
-        /* Timer */
         #countdown { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
         .count-box { min-width: 60px; }
         .count-num { display: block; font-size: 26px; font-weight: bold; color: #fff; }
         .count-lab { font-size: 10px; text-transform: uppercase; color: #bf953f; }
 
-        /* Tombol */
         .btn {
             display: inline-block;
             padding: 15px 35px;
@@ -68,13 +62,11 @@
             font-size: 14px;
             transition: 0.3s;
             width: 100%;
-            max-width: 250px;
+            max-width: 280px;
+            margin: 10px 0;
+            text-align: center;
         }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(191,149,63,0.4); }
 
-        /* Input RSVP */
-        .input-group { text-align: left; max-width: 300px; margin: 0 auto; }
-        .input-group label { display: block; font-size: 12px; color: #bf953f; margin-bottom: 5px; }
         .rsvp-field {
             width: 100%;
             padding: 12px;
@@ -95,9 +87,9 @@
     </audio>
 
     <section class="hero">
-        <p>MENYAMBUT HARI BAHAGIA</p>
+        <p>THE WEDDING OF</p>
         <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
-        <p style="margin-top: 10px;">22 . 05 . 2026</p>
+        <p>22 . 05 . 2026</p>
         <br>
         <button class="btn" onclick="bukaUndangan()">BUKA UNDANGAN</button>
     </section>
@@ -123,6 +115,14 @@
         </div>
 
         <div class="card">
+            <h3>RESEPSI</h3>
+            <p><b>Minggu - Senin</b><br>24 - 25 Mei 2026</p>
+            <p>Mulai Pukul 10.00 WIB s/d Selesai</p>
+            <p>Bertempat di:<br>Rumah Mempelai Wanita</p>
+            <a href="https://maps.app.goo.gl/uXv7p6D12j3fR9yX6" target="_blank" class="btn">LIHAT LOKASI RESEPSI</a>
+        </div>
+
+        <div class="card">
             <h3>WEDDING GIFT</h3>
             <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
             <button class="btn" onclick="salinRekening()">SALIN NO. REKENING</button>
@@ -130,14 +130,14 @@
 
         <div class="card">
             <h3>RESERVASI</h3>
-            <div class="input-group">
-                <label>Nama Tamu</label>
-                <input type="text" id="namaTamu" class="rsvp-field" placeholder="Masukkan nama Anda">
+            <div style="text-align: left; max-width: 300px; margin: 0 auto;">
+                <label style="font-size: 12px; color: #bf953f;">Nama Tamu</label>
+                <input type="text" id="namaTamu" class="rsvp-field" placeholder="Nama Anda">
                 
-                <label>Konfirmasi Kehadiran</label>
+                <label style="font-size: 12px; color: #bf953f;">Konfirmasi</label>
                 <select id="statusHadir" class="rsvp-field">
                     <option value="Hadir">Saya akan Hadir</option>
-                    <option value="Berhalangan">Maaf, Berhalangan Hadir</option>
+                    <option value="Berhalangan">Berhalangan Hadir</option>
                 </select>
                 
                 <button class="btn" onclick="kirimRSVP()">KIRIM KONFIRMASI</button>
@@ -147,50 +147,29 @@
     </div>
 
     <script>
-        // Fungsi Buka Undangan
         function bukaUndangan() {
-            document.getElementById("undanganMusic").play();
+            // Musik diputar saat tombol diklik
+            const audio = document.getElementById("undanganMusic");
+            audio.play().catch(e => console.log("Musik butuh interaksi user"));
             document.getElementById("isiUndangan").scrollIntoView({ behavior: "smooth" });
         }
 
-        // Fungsi Salin Rekening
         function salinRekening() {
             navigator.clipboard.writeText("032101088548501");
             alert("Nomor rekening berhasil disalin!");
         }
 
-        // Fungsi Kirim WhatsApp
         function kirimRSVP() {
             const nama = document.getElementById("namaTamu").value;
             const status = document.getElementById("statusHadir").value;
-            
-            if (nama.trim() === "") {
-                alert("Mohon masukkan nama Anda terlebih dahulu.");
-                return;
-            }
-
-            const pesan = `Halo Zilvi & Syamsul, saya ${nama} ingin mengonfirmasi bahwa saya ${status} di acara pernikahan kalian. Terima kasih!`;
-            const urlWA = `https://wa.me/6281266595366?text=${encodeURIComponent(pesan)}`;
-            window.open(urlWA, '_blank');
+            if (nama.trim() === "") { alert("Mohon masukkan nama Anda"); return; }
+            const pesan = `Halo Zilvi & Syamsul, saya ${nama} mengonfirmasi bahwa saya ${status} di acara pernikahan Anda.`;
+            window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(pesan)}`, '_blank');
         }
 
-        // Timer Hitung Mundur
         const tanggalTujuan = new Date("May 22, 2026 14:00:00").getTime();
-        
         setInterval(function() {
-            const sekarang = new Date().getTime();
-            const selisih = tanggalTujuan - sekarang;
-
-            const d = Math.floor(selisih / (1000 * 60 * 60 * 24));
-            const h = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((selisih % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerHTML = d > 0 ? d : 0;
-            document.getElementById("hours").innerHTML = h > 0 ? h : 0;
-            document.getElementById("mins").innerHTML = m > 0 ? m : 0;
-            document.getElementById("secs").innerHTML = s > 0 ? s : 0;
-        }, 1000);
-    </script>
-</body>
-</html>
+            const selisih = tanggalTujuan - new Date().getTime();
+            document.getElementById("days").innerHTML = Math.max(0, Math.floor(selisih / 86400000));
+            document.getElementById("hours").innerHTML = Math.max(0, Math.floor((selisih % 86400000) / 3600000));
+            document.getElementById("mins").innerHTML
