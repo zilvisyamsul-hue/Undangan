@@ -9,12 +9,8 @@
         * { box-sizing: border-box; }
         body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden; }
         
-        /* Animasi */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        /* Animasi Partikel */
         @keyframes falling { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
-
-        /* Partikel Romantis */
         .particle { position: fixed; top: -10%; color: #fcf6ba; font-size: 20px; user-select: none; pointer-events: none; z-index: 99; animation: falling linear infinite; }
 
         .hero {
@@ -27,7 +23,6 @@
                         url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
             padding: 20px;
             text-align: center;
-            position: relative;
         }
 
         .nama-pengantin {
@@ -40,16 +35,15 @@
         }
 
         .penerima {
-            margin-top: 20px;
+            margin: 20px 0;
             background: rgba(255,255,255,0.05);
             padding: 20px;
             border-radius: 15px;
             backdrop-filter: blur(8px);
             border: 1px solid rgba(191, 149, 63, 0.2);
-            animation: fadeIn 3s ease-in;
         }
 
-        .content-section { padding: 80px 20px; background: #000; }
+        .content-section { display: none; padding: 60px 20px; background: #000; }
         
         .card {
             background: #111;
@@ -57,14 +51,9 @@
             border-radius: 20px;
             padding: 40px 25px;
             max-width: 480px;
-            margin: 0 auto 60px;
+            margin: 0 auto 50px;
             text-align: center;
-            opacity: 0; /* Untuk efek muncul saat scroll */
-            transform: translateY(30px);
-            transition: all 1s ease-out;
         }
-
-        .card.reveal { opacity: 1; transform: translateY(0); }
 
         .btn {
             display: inline-block;
@@ -79,10 +68,7 @@
             width: 100%;
             max-width: 280px;
             border: none;
-            transition: 0.3s;
         }
-
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(191, 149, 63, 0.5); }
 
         audio { display: none; }
     </style>
@@ -93,17 +79,17 @@
         <source src="Wedding Cinematic 1 menit Aflaha and Hakim Story _ by candrapriaperdana (1).mp3" type="audio/mp3">
     </audio>
 
-    <section class="hero">
+    <section id="heroSection" class="hero">
         <p>THE WEDDING OF</p>
         <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
         <div class="penerima">
             <p style="font-size: 12px; margin: 0;">Kepada Yth:</p>
             <h2 id="namaTamuUndangan" style="margin: 10px 0; color: #fcf6ba; font-family: 'Playfair Display', serif;">Tamu Undangan</h2>
         </div>
-        <button class="btn" onclick="bukaUndangan()" style="margin-top: 30px;">BUKA UNDANGAN</button>
+        <button class="btn" onclick="bukaUndangan()">BUKA UNDANGAN</button>
     </section>
 
-    <div id="isiUndangan" class="content-section" style="display:none;">
+    <div id="isiUndangan" class="content-section">
         
         <div class="card">
             <h3>AKAD NIKAH</h3>
@@ -133,7 +119,6 @@
 
         <div class="card">
             <h3>WEDDING GIFT</h3>
-            <p style="font-style: italic; font-size: 13px; margin-bottom: 20px;">"Doa restu Anda adalah hadiah terindah, namun jika ingin memberikan tanda kasih..."</p>
             <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
             <button class="btn" onclick="salinRekening()">SALIN REKENING</button>
         </div>
@@ -141,59 +126,37 @@
     </div>
 
     <script>
-        // Ambil Nama dari URL
+        // Ambil Nama Tamu
         const params = new URLSearchParams(window.location.search);
         const tamu = params.get('to');
         if (tamu) document.getElementById('namaTamuUndangan').innerText = tamu.replace(/\+/g, ' ');
 
-        // Efek Partikel Berjatuhan
+        // Efek Kelopak Sakura
         function createParticle() {
             const particle = document.createElement('div');
-            particle.innerHTML = '🌸'; // Bisa diganti '✨' atau '❤️'
+            particle.innerHTML = '🌸';
             particle.classList.add('particle');
             particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDuration = Math.random() * 3 + 2 + 's';
-            particle.style.opacity = Math.random();
+            particle.style.animationDuration = Math.random() * 3 + 3 + 's';
             document.body.appendChild(particle);
-            setTimeout(() => { particle.remove(); }, 5000);
+            setTimeout(() => { particle.remove(); }, 6000);
         }
-        setInterval(createParticle, 500);
+        setInterval(createParticle, 600);
 
         function bukaUndangan() {
             // Putar Musik
-            document.getElementById("undanganMusic").play();
+            const audio = document.getElementById("undanganMusic");
+            audio.play().catch(e => console.log("Musik tertunda"));
             
             // Tampilkan konten
             const isi = document.getElementById("isiUndangan");
             isi.style.display = "block";
 
-            // Scroll Otomatis Halus ke bawah
-            let body = document.documentElement;
-            let targetPos = isi.offsetTop;
-            let currentPos = window.pageYOffset;
-            let speed = 2; // Kecepatan scroll
-
-            function autoScroll() {
-                if (currentPos < targetPos) {
-                    currentPos += speed;
-                    window.scrollTo(0, currentPos);
-                    requestAnimationFrame(autoScroll);
-                }
-            }
-            autoScroll();
-
-            // Jalankan deteksi reveal kartu saat scroll
-            window.addEventListener('scroll', revealCards);
-            setTimeout(revealCards, 500);
-        }
-
-        function revealCards() {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                if (cardTop < window.innerHeight - 100) {
-                    card.classList.add('reveal');
-                }
+            // Scroll Otomatis Halus
+            const targetPos = isi.offsetTop;
+            window.scrollTo({
+                top: targetPos,
+                behavior: 'smooth'
             });
         }
 
@@ -205,8 +168,9 @@
         function kirimDoa() {
             const nama = document.getElementById("namaPengirim").value;
             const pesan = document.getElementById("pesanDoa").value;
-            const teks = Halo Zilvi & Syamsul, saya ${nama} mengucapkan: ${pesan};
-            window.open(https://wa.me/6281266595366?text=${encodeURIComponent(teks)}, '_blank');
+            if(!nama || !pesan) { alert("Mohon isi nama dan ucapan."); return; }
+            const teks = `Halo Zilvi & Syamsul, saya ${nama} mengucapkan: ${pesan}`;
+            window.open(`https://wa.me/6281266595366?text=${encodeURIComponent(teks)}`, '_blank');
         }
     </script>
 </body>
