@@ -3,143 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan Zilvi & Syamsul</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:italic,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <title>Undangan Zilvi & Syamsul</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; line-height: 1.6; overflow-x: hidden; }
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background: #000; color: #fff; text-align: center; }
         
-        .hero {
+        /* Sampul Utama */
+        #hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('deb07009-7159-49f3-90a8-bbc6da9acda4.jpg') center/cover no-repeat;
             padding: 20px;
-            text-align: center;
-            position: relative;
-            z-index: 5;
         }
 
-        .nama-pengantin {
-            font-family: 'Great Vibes', cursive;
-            font-size: clamp(50px, 14vw, 90px);
-            margin: 10px 0;
-            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .nama { font-family: 'Great Vibes', cursive; font-size: 60px; color: #fcf6ba; margin: 10px 0; }
 
-        .penerima {
-            margin: 20px 0;
-            background: rgba(255,255,255,0.05);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(191, 149, 63, 0.2);
-        }
-
+        /* Tombol Buka - Dibuat sangat prioritas */
         .btn-buka {
-            display: inline-block;
-            padding: 16px 40px;
-            background: linear-gradient(to right, #bf953f, #fcf6ba);
-            color: #000 !important;
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            max-width: 280px;
+            padding: 15px 40px;
+            background: #bf953f;
+            color: #000;
+            font-weight: bold;
             border: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 9999;
             position: relative;
-            z-index: 100;
+            box-shadow: 0 0 20px rgba(252, 246, 186, 0.5);
         }
 
-        .content-section { display: none; padding: 60px 20px; background: #000; }
+        /* Konten Isi */
+        #konten { display: none; padding: 40px 20px; background: #000; }
         
         .card {
             background: #111;
-            border: 1px solid rgba(191, 149, 63, 0.4);
-            border-radius: 20px;
-            padding: 40px 25px;
-            max-width: 480px;
-            margin: 0 auto 50px;
-            text-align: center;
+            border: 1px solid #bf953f;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .particle { position: fixed; top: -10%; color: #fcf6ba; font-size: 20px; pointer-events: none; z-index: 1; animation: falling linear infinite; }
-        @keyframes falling { 0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+        .btn-umum {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #bf953f;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Musik Control */
+        #music-box { position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: none; }
     </style>
 </head>
 <body>
 
-    <audio id="undanganMusic" loop>
+    <audio id="mySong" loop>
         <source src="music.mp3." type="audio/mp3">
     </audio>
 
-    <section id="heroPage" class="hero">
-        <p>THE WEDDING OF</p>
-        <h1 class="nama-pengantin">Zilvi & Syamsul</h1>
-        <div class="penerima">
-            <p style="font-size: 12px; margin: 0;">Kepada Yth:</p>
-            <h2 id="namaTamuUndangan" style="margin: 10px 0; color: #fcf6ba; font-family: 'Playfair Display', serif;">Tamu Undangan</h2>
+    <div id="music-box">
+        <button onclick="toggleMusic()" style="border-radius: 50%; width: 50px; height: 50px; background: #bf953f; border: none; cursor: pointer;">🎵</button>
+    </div>
+
+    <section id="hero">
+        <p>UNDANGAN PERNIKAHAN</p>
+        <h1 class="nama">Zilvi & Syamsul</h1>
+        <div style="margin: 20px 0; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; border: 1px solid #bf953f;">
+            <p style="margin: 0; font-size: 12px;">Kepada Yth Bapak/Ibu/Saudara/i:</p>
+            <h3 id="tamu" style="color: #fcf6ba; margin: 5px 0;">Tamu Undangan</h3>
         </div>
-        <button class="btn-buka" onclick="bukaUndangan()">BUKA UNDANGAN</button>
+        <button class="btn-buka" onclick="bukaSekarang()">BUKA UNDANGAN</button>
     </section>
 
-    <div id="isiUndangan" class="content-section">
+    <div id="konten">
         <div class="card">
             <h3>AKAD NIKAH</h3>
-            <p><b>Jumat, 22 Mei 2026</b><br>Pukul 14.00 WIB</p>
-            <p>Mesjid Taqwa Koto Magek,<br>Balai Baiak</p>
+            <p>Jumat, 22 Mei 2026<br>14.00 WIB - Selesai</p>
+            <p>Mesjid Taqwa Koto Magek, Balai Baiak</p>
         </div>
 
         <div class="card">
             <h3>RESEPSI</h3>
-            <p><b>Minggu - Senin</b><br>24 - 25 Mei 2026</p>
-            <p>Mulai Pukul 10.00 WIB s/d Selesai</p>
-            <p style="background: rgba(191, 149, 63, 0.1); padding: 10px; border-radius: 10px;">
-                Bertempat di:<br><b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak
-            </p>
-            <br>
-            <a href="https://maps.app.goo.gl/9t7BqK3z2P1W8V8p9" target="_blank" style="text-decoration:none;">
-                <div class="btn-buka" style="font-size:14px; text-align:center;">LIHAT LOKASI</div>
-            </a>
+            <p>Minggu - Senin, 24 - 25 Mei 2026</p>
+            <p><b>Kediaman Mempelai Wanita</b><br>Bukik Kabun, Balai Baiak</p>
+            <a href="https://www.google.com/maps?q=-0.2294132,100.4131234" target="_blank" class="btn-umum">LOKASI MAPS</a>
         </div>
 
-        <div class="card" style="margin-bottom: 100px;">
-            <h3>WEDDING GIFT</h3>
-            <p>BANK BRI<br><b>032101088548501</b><br>a/n Zilvi Rizkiani Putri</p>
-            <button class="btn-buka" onclick="salinRekening()" style="font-size:14px;">SALIN REKENING</button>
+        <div class="card">
+            <h3>GIFT</h3>
+            <p>BANK BRI<br>032101088548501<br>a/n Zilvi Rizkiani Putri</p>
         </div>
     </div>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const tamu = urlParams.get('to');
-        if (tamu) document.getElementById('namaTamuUndangan').innerText = tamu.replace(/\+/g, ' ');
+        // Ambil nama dari URL
+        const query = new URLSearchParams(window.location.search);
+        const namaTamu = query.get('to');
+        if (namaTamu) { document.getElementById('tamu').innerText = namaTamu.replace(/\+/g, ' '); }
 
-        function bukaUndangan() {
-            // Memutar musik
-            var audio = document.getElementById("undanganMusic");
-            audio.play().catch(e => console.log("Audio play error"));
-
-            // Tampilkan isi
-            document.getElementById("isiUndangan").style.display = "block";
+        function bukaSekarang() {
+            // Sembunyikan Hero, Tampilkan Isi
+            document.getElementById('hero').style.display = 'none';
+            document.getElementById('konten').style.display = 'block';
+            document.getElementById('music-box').style.display = 'block';
             
-            // Scroll otomatis ke isi
-            window.scrollTo({
-                top: document.getElementById("isiUndangan").offsetTop,
-                behavior: "smooth"
+            // Coba putar musik
+            var audio = document.getElementById("mySong");
+            audio.play().catch(function(error) {
+                console.log("Musik butuh klik manual");
             });
-            
-            // Jalankan partikel bunga
-            setInterval(createParticle, 800);
         }
 
-        function createParticle() {
-            const p = document.createElement('
+        var playing = true;
+        function toggleMusic() {
+            var audio = document.getElementById("mySong");
+            if (playing) { audio.pause(); } else { audio.play(); }
+            playing = !playing;
+        }
+    </script>
+</body>
+</html>
